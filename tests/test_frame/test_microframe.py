@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
-from microframe.frame.microframe import MicroFrame
-from microframe.frame.indexers import StructuredArrayIndexer
+from microframe.core.microframe import MicroFrame
+from microframe.core.indexers import StructuredArrayIndexer
 
 
 @pytest.fixture

@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from microframe.frame.manipulators import StructuredArrayManipulator, ArrayManipulationError
+from microframe.core.manipulators import StructuredArrayManipulator, ArrayManipulationError
 
 
 @pytest.fixture

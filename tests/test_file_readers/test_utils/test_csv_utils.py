@@ -2,7 +2,7 @@ from unittest.mock import patch, mock_open
 import pytest
 import csv
 
-from microframe.file_readers.utils import csv_utils
+from microframe.readers.utils import csv_utils
 
 
 def test_open_csv_file_expected_data():

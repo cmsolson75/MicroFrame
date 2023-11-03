@@ -1,8 +1,8 @@
 import pytest
 import numpy as np
 from unittest.mock import mock_open, patch
-from microframe.file_readers.readers import read_csv
-from microframe.frame.microframe import MicroFrame
+from microframe.readers.readers import read_csv
+from microframe.core.microframe import MicroFrame
 
 
 def test_read_valid_csv():

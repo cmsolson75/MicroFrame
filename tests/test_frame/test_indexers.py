@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from microframe.frame.indexers import StructuredArrayIndexer
+from microframe.core.indexers import StructuredArrayIndexer
 
 values = np.array([(1, "a"), (2, "b"), (3, "c")], dtype=[("num", "i4"), ("char", "U1")])
 columns = ["num", "char"]

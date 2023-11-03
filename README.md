@@ -28,7 +28,7 @@ Ensure you have Python 3.x installed on your system to use MicroFrame.
 ### Reading a CSV File
 
 ```python
-from microframe.frame import read_csv
+from microframe.readers import read_csv
 
 # Read a CSV file and construct a MicroFrame object
 microframe = read_csv('path/to/your/file.csv')
@@ -43,7 +43,7 @@ microframe.head()
 You can create a MicroFrame object manually by providing data, data types, and column names:
 
 ```python
-from microframe.frame.microframe import MicroFrame
+from microframe.core.microframe import MicroFrame
 
 # Sample data to be encapsulated in the MicroFrame object
 data = [
@@ -64,7 +64,7 @@ To print out your data in a tabular format, you can use the Printer class:
 
 ```python
 import numpy as np
-from microframe.frame.printers import StructuredDataPrinter
+from microframe.core.printers import StructuredDataPrinter
 
 # Sample structured data
 values = np.array(
