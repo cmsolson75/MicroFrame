@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from frame.printers import StructuredDataPrinter
+from microframe.frame.printers import StructuredDataPrinter
 
 
 @pytest.fixture

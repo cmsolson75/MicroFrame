@@ -1,5 +1,5 @@
 from .utils.csv_utils import open_csv, infer_column_dtypes
-from frame.microframe import MicroFrame
+from microframe.frame.microframe import MicroFrame
 
 
 def read_csv(file_path: str) -> MicroFrame:
@@ -19,7 +19,7 @@ def read_csv(file_path: str) -> MicroFrame:
     :raises ValueError: If the CSV file is empty or the data types cannot be inferred.
 
     Example::
-        >>> from file_readers.readers import read_csv
+        >>> from microframe.file_readers import read_csv
         >>> microframe = read_csv('path/to/your.csv')
         >>> print(microframe)
     """
