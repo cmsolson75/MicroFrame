@@ -9,13 +9,15 @@ from frame.microframe import MicroFrame
 def test_read_valid_csv():
     mock_data = "col1,col2,col3\nval1,val2,val3\n"
     m = mock_open(read_data=mock_data)
-    with patch("builtins.open", m), patch("csv.reader",
-                                          return_value=iter([["col1", "col2", "col3"], ["val1", "val2", "val3"]])):
+    with patch("builtins.open", m), patch(
+        "csv.reader",
+        return_value=iter([["col1", "col2", "col3"], ["val1", "val2", "val3"]]),
+    ):
         microframe = read_csv("any_path")
         assert isinstance(microframe, MicroFrame)
 
         assert len(microframe) > 0
-    m.assert_called_once_with("any_path", mode='r', newline='', encoding='utf-8')
+    m.assert_called_once_with("any_path", mode="r", newline="", encoding="utf-8")
 
 
 def test_invalid_csv_format(tmpdir):
@@ -36,8 +38,8 @@ def test_infer_data_types(tmpdir):
     file_path = tmpdir.join("datatypes.csv")
     file_path.write("Integers,Floats,Strings\n1,3.14,Hello\n2,2.71,World")
     microframe = read_csv(str(file_path))
-    assert microframe.types['Floats'] == np.float32
-    assert microframe.types['Strings'] == "U100"
+    assert microframe.types["Floats"] == np.float32
+    assert microframe.types["Strings"] == "U100"
 
 
 def test_incorrect_csv_content_format(tmpdir):

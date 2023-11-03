@@ -7,6 +7,7 @@ class StructuredArrayIndexer:
     :param columns: Column names corresponding to the data.
     :type columns: list
     """
+
     def __init__(self, values, columns):
         """
         Initializes the StructuredArrayIndexer with the structured array and its column names.

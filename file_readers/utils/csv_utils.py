@@ -18,8 +18,8 @@ def open_csv(file_path: str) -> list:
         raise TypeError("The file_path must be a string.")
 
     try:
-        with open(file_path, mode='r', newline='', encoding="utf-8") as file:
-            reader = csv.reader(file, delimiter=',')
+        with open(file_path, mode="r", newline="", encoding="utf-8") as file:
+            reader = csv.reader(file, delimiter=",")
             csv_contents = list(reader)
             return csv_contents
     except FileNotFoundError:
@@ -69,4 +69,7 @@ def infer_column_dtypes(data: list) -> list:
     numeric_default_type = "float32"
     string_default_type = "U100"
 
-    return [numeric_default_type if is_float(item) else string_default_type for item in data[0]]
+    return [
+        numeric_default_type if is_float(item) else string_default_type
+        for item in data[0]
+    ]

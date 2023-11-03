@@ -13,6 +13,7 @@ class StructuredDataPrinter:
     :ivar columns: Column names corresponding to the data.
     :ivar max_value_length: Maximum display length for cell values.
     """
+
     def __init__(self, values, columns, max_value_length=20):
         """
         Initializes the StructuredDataPrinter with data, columns, and an optional maximum value length.
@@ -36,7 +37,7 @@ class StructuredDataPrinter:
         """
         str_value = str(value)
         if len(str_value) > self.max_value_length:
-            return str_value[:self.max_value_length - 3] + "..."
+            return str_value[: self.max_value_length - 3] + "..."
         return str_value
 
     def _print_all_columns(self):
@@ -46,11 +47,20 @@ class StructuredDataPrinter:
         """
         h = self.columns
         truncated_headers = [self._truncate_value(header) for header in h]
-        header_str = '  '.join([truncated_headers[i].ljust(self.max_widths[i]) for i in range(len(h))])
+        header_str = "  ".join(
+            [truncated_headers[i].ljust(self.max_widths[i]) for i in range(len(h))]
+        )
         print(header_str)
-        print('-' * len(header_str))
+        print("-" * len(header_str))
         for row in self.subset_rows:
-            print('  '.join([self._truncate_value(row[i]).ljust(self.max_widths[i]) for i in range(len(h))]))
+            print(
+                "  ".join(
+                    [
+                        self._truncate_value(row[i]).ljust(self.max_widths[i])
+                        for i in range(len(h))
+                    ]
+                )
+            )
 
     def _print_truncated_columns(self, num_cols, max_width):
         """
@@ -64,23 +74,39 @@ class StructuredDataPrinter:
         left_cols, right_cols = self._determine_columns_to_show(max_width, num_cols)
         headers = self.columns
         left_headers = headers[:left_cols]
-        right_headers = headers[-left_cols - right_cols:]
+        right_headers = headers[-left_cols - right_cols :]
         left_widths = self.max_widths[:left_cols]
-        right_widths = self.max_widths[-left_cols - right_cols:]
+        right_widths = self.max_widths[-left_cols - right_cols :]
 
-        header_str = '  '.join([self._truncate_value(left_headers[i]).ljust(left_widths[i]) for i in range(left_cols)])
+        header_str = "  ".join(
+            [
+                self._truncate_value(left_headers[i]).ljust(left_widths[i])
+                for i in range(left_cols)
+            ]
+        )
         if right_cols > 0:
-            header_str += ' ... ' + '  '.join(
-                [self._truncate_value(right_headers[i]).ljust(right_widths[i]) for i in range(right_cols)])
+            header_str += " ... " + "  ".join(
+                [
+                    self._truncate_value(right_headers[i]).ljust(right_widths[i])
+                    for i in range(right_cols)
+                ]
+            )
 
         print(header_str)
-        print('-' * len(header_str))
+        print("-" * len(header_str))
         for row in self.subset_rows:
             left_items = [self._truncate_value(row[i]) for i in range(left_cols)]
-            right_items = [self._truncate_value(row[i]) for i in range(len(headers) - right_cols, len(headers))]
-            row_str = '  '.join([left_items[i].ljust(left_widths[i]) for i in range(left_cols)])
+            right_items = [
+                self._truncate_value(row[i])
+                for i in range(len(headers) - right_cols, len(headers))
+            ]
+            row_str = "  ".join(
+                [left_items[i].ljust(left_widths[i]) for i in range(left_cols)]
+            )
             if right_cols > 0:
-                row_str += ' ... ' + '  '.join([right_items[i].ljust(right_widths[i]) for i in range(right_cols)])
+                row_str += " ... " + "  ".join(
+                    [right_items[i].ljust(right_widths[i]) for i in range(right_cols)]
+                )
             print(row_str)
 
     def _compute_widths(self, num_rows, tail=False):
@@ -98,10 +124,15 @@ class StructuredDataPrinter:
         else:
             self.subset_rows = self.values[:num_rows]
         truncated_headers = [self._truncate_value(header) for header in headers]
-        self.column_widths = [max(len(self._truncate_value(row[i])) for row in self.subset_rows)
-                              for i in range(len(headers))]
+        self.column_widths = [
+            max(len(self._truncate_value(row[i])) for row in self.subset_rows)
+            for i in range(len(headers))
+        ]
         self.header_widths = [len(header) for header in truncated_headers]
-        self.max_widths = [max(self.column_widths[i], self.header_widths[i]) for i in range(len(headers))]
+        self.max_widths = [
+            max(self.column_widths[i], self.header_widths[i])
+            for i in range(len(headers))
+        ]
 
     def _determine_columns_to_show(self, max_width, num_cols=None):
         """

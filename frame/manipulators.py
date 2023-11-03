@@ -3,6 +3,7 @@ import numpy as np
 
 class ArrayManipulationError(Exception):
     """Raised when there's an error during Structured Array manipulation"""
+
     pass
 
 
@@ -33,15 +34,24 @@ class StructuredArrayManipulator:
         """
         for old_name, new_name in new_columns.items():
             if old_name not in self.columns:
-                raise ArrayManipulationError(f"Column '{old_name}' does not exist and cannot be renamed.")
+                raise ArrayManipulationError(
+                    f"Column '{old_name}' does not exist and cannot be renamed."
+                )
             if new_name in self.columns and new_name != old_name:
-                raise ArrayManipulationError(f"Column '{new_name}' already exists. Duplicate names are not allowed.")
+                raise ArrayManipulationError(
+                    f"Column '{new_name}' already exists. Duplicate names are not allowed."
+                )
 
-        new_dtypes = [(new_columns.get(old_name, old_name), self.values.dtype[old_name]) for old_name in self.columns]
+        new_dtypes = [
+            (new_columns.get(old_name, old_name), self.values.dtype[old_name])
+            for old_name in self.columns
+        ]
         self.values = self.values.astype(new_dtypes)
 
         # Create a new columns array with the updated names
-        new_columns_array = np.array([new_columns.get(old_name, old_name) for old_name in self.columns])
+        new_columns_array = np.array(
+            [new_columns.get(old_name, old_name) for old_name in self.columns]
+        )
         self.columns = new_columns_array
 
     def change_dtypes(self, dtypes_dict):
@@ -55,12 +65,16 @@ class StructuredArrayManipulator:
         try:
             for column_name, data_type in dtypes_dict.items():
                 if column_name not in self.columns:
-                    raise ArrayManipulationError(f"Column '{column_name}' does not exist and cannot have its data "
-                                                 f"type changed.")
+                    raise ArrayManipulationError(
+                        f"Column '{column_name}' does not exist and cannot have its data "
+                        f"type changed."
+                    )
 
             # Create a list of tuples for new dtypes
-            new_dtypes = [(name, dtypes_dict.get(name, self.values.dtype.fields[name][0])) for name in
-                          self.values.dtype.names]
+            new_dtypes = [
+                (name, dtypes_dict.get(name, self.values.dtype.fields[name][0]))
+                for name in self.values.dtype.names
+            ]
             new_values = np.zeros(self.values.shape, dtype=new_dtypes)
 
             for name in self.values.dtype.names:

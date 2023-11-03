@@ -47,7 +47,13 @@ class MicroFrame:
     change_dtypes(dtypes_dict)
         Changes the data types of specified columns.
     """
-    def __init__(self, data: List[List[Any]], dtypes: List[str], columns: Optional[List[str]] = None):
+
+    def __init__(
+        self,
+        data: List[List[Any]],
+        dtypes: List[str],
+        columns: Optional[List[str]] = None,
+    ):
         if not isinstance(data, list) or not all(isinstance(row, list) for row in data):
             raise TypeError("Data must be a list of lists.")
         if columns is not None and not isinstance(columns, list):
@@ -59,7 +65,9 @@ class MicroFrame:
         self.values = self._initialize_values(data, dtypes, self.columns)
 
     @staticmethod
-    def _initialize_columns(data: List[List[Any]], columns: Optional[List[str]] = None) -> np.ndarray:
+    def _initialize_columns(
+        data: List[List[Any]], columns: Optional[List[str]] = None
+    ) -> np.ndarray:
         """
         Initialize the columns for the MicroFrame based on the provided data and columns.
 
@@ -79,17 +87,23 @@ class MicroFrame:
                 raise ValueError("All column names must be of type str.")
 
             if len(columns) != num_columns:
-                if len(columns) == num_columns + 1 and columns[-1] == '':
+                if len(columns) == num_columns + 1 and columns[-1] == "":
                     columns = columns[:-1]
                 else:
-                    raise ValueError("Columns and the data rows must be of equal length.")
+                    raise ValueError(
+                        "Columns and the data rows must be of equal length."
+                    )
 
-            columns = [f"Unnamed: {i}" if not name else name for i, name in enumerate(columns)]
+            columns = [
+                f"Unnamed: {i}" if not name else name for i, name in enumerate(columns)
+            ]
 
         return np.array(columns)
 
     @staticmethod
-    def _initialize_values(data: List[List[Any]], dtypes: List[str], columns: np.ndarray) -> np.ndarray:
+    def _initialize_values(
+        data: List[List[Any]], dtypes: List[str], columns: np.ndarray
+    ) -> np.ndarray:
         """
         Initialize the values for the MicroFrame based on the provided data, dtypes, and columns.
 

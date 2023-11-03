@@ -6,9 +6,9 @@ from frame.indexers import StructuredArrayIndexer
 
 @pytest.fixture
 def default_microframe():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    dtypes = ['float32', 'U100']
-    columns = ['num', 'char']
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    dtypes = ["float32", "U100"]
+    columns = ["num", "char"]
     return MicroFrame(data, dtypes, columns)
 
 
@@ -17,12 +17,13 @@ def test_microframe_initialization(default_microframe):
     Test initialization of microframe class
     """
     microframe = default_microframe
-    expected_values = np.array([(1, 'a'), (2, 'b'), (3, 'c')],
-                               dtype=[('num', '<f4'), ('char', '<U100')])
+    expected_values = np.array(
+        [(1, "a"), (2, "b"), (3, "c")], dtype=[("num", "<f4"), ("char", "<U100")]
+    )
 
     assert isinstance(microframe, MicroFrame)
 
-    assert all(microframe.columns == ['num', 'char'])
+    assert all(microframe.columns == ["num", "char"])
     assert np.array_equal(microframe.values, expected_values)
     assert np.array_equal(microframe.values.dtype, expected_values.dtype)
 
@@ -30,29 +31,34 @@ def test_microframe_initialization(default_microframe):
     assert isinstance(microframe.values, np.ndarray)
 
     # Test types property
-    assert np.array_equal(microframe.types, np.dtype([('num', '<f4'), ('char', '<U100')]))
+    assert np.array_equal(
+        microframe.types, np.dtype([("num", "<f4"), ("char", "<U100")])
+    )
 
     # Test shape property
     assert microframe.shape == (3, 2)
 
 
-@pytest.mark.parametrize("data, dtypes, columns, exception", [
-    (1, ['float32', 'U100'], ['num', 'char'], TypeError),
-    ("hi", ['float32', 'U100'], ['num', 'char'], TypeError),
-    ([['1', 'a'], ['2', 'b'], ['3', 'c']], 1, ['num', 'char'], TypeError),
-    ([['1', 'a'], ['2', 'b'], ['3', 'c']], ['float32', 'U100'], 1, TypeError),
-    ([], ['float32', 'U100'], ['num', 'char'], ValueError),
-    ([['1', 'a'], ['2', 'b'], ['3', 'c']], [], ['num', 'char'], ValueError),
-    ([['1', 'a'], ['2', 'b'], ['3', 'c']], ['float32', 'U100'], [], ValueError),
-])
+@pytest.mark.parametrize(
+    "data, dtypes, columns, exception",
+    [
+        (1, ["float32", "U100"], ["num", "char"], TypeError),
+        ("hi", ["float32", "U100"], ["num", "char"], TypeError),
+        ([["1", "a"], ["2", "b"], ["3", "c"]], 1, ["num", "char"], TypeError),
+        ([["1", "a"], ["2", "b"], ["3", "c"]], ["float32", "U100"], 1, TypeError),
+        ([], ["float32", "U100"], ["num", "char"], ValueError),
+        ([["1", "a"], ["2", "b"], ["3", "c"]], [], ["num", "char"], ValueError),
+        ([["1", "a"], ["2", "b"], ["3", "c"]], ["float32", "U100"], [], ValueError),
+    ],
+)
 def test_microframe_initialization_exceptions(data, dtypes, columns, exception):
     with pytest.raises(exception):
         MicroFrame(data, dtypes, columns)
 
 
 def test_initialize_columns_with_columns_specified():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    columns = ['num', 'char']
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    columns = ["num", "char"]
 
     result = MicroFrame._initialize_columns(data, columns)
 
@@ -60,56 +66,58 @@ def test_initialize_columns_with_columns_specified():
 
 
 def test_initialize_columns_with_no_columns_specified():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
     columns = None
 
     result = MicroFrame._initialize_columns(data, columns)
 
-    expected_columns = np.array(['Unnamed: 0', 'Unnamed: 1'])
+    expected_columns = np.array(["Unnamed: 0", "Unnamed: 1"])
     assert np.array_equal(result, expected_columns)
 
 
 def test_initialize_columns_with_columns_specified_and_trailing_empty_column():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    columns = ['num', 'char', '']
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    columns = ["num", "char", ""]
 
     result = MicroFrame._initialize_columns(data, columns)
 
-    expected_columns = np.array(['num', 'char'])
+    expected_columns = np.array(["num", "char"])
     assert np.array_equal(result, expected_columns)
 
 
 def test_initialize_columns_with_mismatched_data_and_columns():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    columns = ['num', 'char', 'extra']
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    columns = ["num", "char", "extra"]
 
     with pytest.raises(ValueError):
         MicroFrame._initialize_columns(data, columns)
 
 
 def test_initialize_columns_with_wrong_data_type_in_columns():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    columns = ['num', 'char', 1]
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    columns = ["num", "char", 1]
 
     with pytest.raises(ValueError):
         MicroFrame._initialize_columns(data, columns)
 
 
 def test_initialize_values_with_valid_data_and_dtypes():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    dtypes = ['int32', 'U1']
-    columns = np.array(['num', 'char'])
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    dtypes = ["int32", "U1"]
+    columns = np.array(["num", "char"])
 
     result = MicroFrame._initialize_values(data, dtypes, columns)
 
-    expected_values = np.array([(1, 'a'), (2, 'b'), (3, 'c')], dtype=[('num', 'i4'), ('char', 'U1')])
+    expected_values = np.array(
+        [(1, "a"), (2, "b"), (3, "c")], dtype=[("num", "i4"), ("char", "U1")]
+    )
     assert np.array_equal(result, expected_values)
 
 
 def test_initialize_values_with_invalid_dtype():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    dtypes = ['int32', 'this_is_not_a_valid_dtype']
-    columns = np.array(['num', 'char'])
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    dtypes = ["int32", "this_is_not_a_valid_dtype"]
+    columns = np.array(["num", "char"])
 
     with pytest.raises(ValueError) as excinfo:
         MicroFrame._initialize_values(data, dtypes, columns)
@@ -117,18 +125,18 @@ def test_initialize_values_with_invalid_dtype():
 
 
 def test_initialize_values_with_mismatched_data_and_dtypes():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    dtypes = ['int32', 'U1', 'float64']
-    columns = np.array(['num', 'char'])
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    dtypes = ["int32", "U1", "float64"]
+    columns = np.array(["num", "char"])
 
     with pytest.raises(ValueError):
         MicroFrame._initialize_values(data, dtypes, columns)
 
 
 def test_initialize_values_with_mismatched_data_and_columns():
-    data = [['1', 'a'], ['2', 'b'], ['3', 'c']]
-    dtypes = ['int32', 'U1']
-    columns = np.array(['num', 'char', 'extra'])
+    data = [["1", "a"], ["2", "b"], ["3", "c"]]
+    dtypes = ["int32", "U1"]
+    columns = np.array(["num", "char", "extra"])
 
     with pytest.raises(ValueError):
         MicroFrame._initialize_values(data, dtypes, columns)
@@ -142,10 +150,13 @@ def test_properties_microframe(default_microframe):
     assert mf.shape == (len(mf.values), len(mf.columns))
 
 
-@pytest.mark.parametrize("rename_dict, expected_columns", [
-    ({"num": "number", "char": "character"}, ['number', 'character']),
-    ({"char": "symbol"}, ['num', 'symbol']),
-])
+@pytest.mark.parametrize(
+    "rename_dict, expected_columns",
+    [
+        ({"num": "number", "char": "character"}, ["number", "character"]),
+        ({"char": "symbol"}, ["num", "symbol"]),
+    ],
+)
 def test_rename_columns_microframe(default_microframe, rename_dict, expected_columns):
     # Rename columns
     microframe = default_microframe
@@ -153,13 +164,21 @@ def test_rename_columns_microframe(default_microframe, rename_dict, expected_col
 
     # Assertions
     assert list(microframe.columns) == expected_columns
-    assert all(new_name in microframe.values.dtype.names for new_name in expected_columns)
+    assert all(
+        new_name in microframe.values.dtype.names for new_name in expected_columns
+    )
 
 
-@pytest.mark.parametrize("new_dtypes, expected_dtypes", [
-    ({'num': 'f8', 'char': 'U10'}, {'num': np.dtype('f8'), 'char': np.dtype('U10')}),
-    ({'char': 'U5'}, {'num': np.dtype('f4'), 'char': np.dtype('U5')}),
-])
+@pytest.mark.parametrize(
+    "new_dtypes, expected_dtypes",
+    [
+        (
+            {"num": "f8", "char": "U10"},
+            {"num": np.dtype("f8"), "char": np.dtype("U10")},
+        ),
+        ({"char": "U5"}, {"num": np.dtype("f4"), "char": np.dtype("U5")}),
+    ],
+)
 def test_change_dtypes_microframe(default_microframe, new_dtypes, expected_dtypes):
     # Change dtypes
     microframe = default_microframe
@@ -172,12 +191,13 @@ def test_change_dtypes_microframe(default_microframe, new_dtypes, expected_dtype
 
 def test_iloc_microframe(default_microframe):
     mf = default_microframe
-    expected_values = np.array([(1., 'a'), (2., 'b'), (3., 'c')],
-                               dtype=[('num', '<f4'), ('char', '<U100')])
+    expected_values = np.array(
+        [(1.0, "a"), (2.0, "b"), (3.0, "c")], dtype=[("num", "<f4"), ("char", "<U100")]
+    )
 
     # Assertions
     assert isinstance(mf.iloc, StructuredArrayIndexer)
-    assert tuple(mf.iloc[0]) == (1., 'a')
+    assert tuple(mf.iloc[0]) == (1.0, "a")
     assert mf.iloc[0, 0] == 1.0
     assert np.array_equal(mf.iloc[:], expected_values)
     assert list(mf.iloc[:, 0]) == [1.0, 2.0, 3.0]
