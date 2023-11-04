@@ -39,6 +39,23 @@ def test_microframe_initialization(default_microframe):
     assert microframe.shape == (3, 2)
 
 
+def test_microframe_initialization_with_structured_array():
+    """
+    Test initialization of MicroFrame class with a NumPy structured array
+    """
+    structured_data = np.array(
+        [(1, 'Alice', 35.5), (2, 'Bob', 45.0), (3, 'Charlie', 25.5)],
+        dtype=[('ID', 'i4'), ('Name', 'U10'), ('Age', 'f4')]
+    )
+
+    microframe = MicroFrame(data=structured_data)
+
+    assert isinstance(microframe, MicroFrame)
+    assert all(microframe.columns == ['ID', 'Name', 'Age'])
+    assert np.array_equal(microframe.values, structured_data)
+    assert np.array_equal(microframe.values.dtype, structured_data.dtype)
+
+
 @pytest.mark.parametrize(
     "data, dtypes, columns, exception",
     [
@@ -173,8 +190,8 @@ def test_rename_columns_microframe(default_microframe, rename_dict, expected_col
     "new_dtypes, expected_dtypes",
     [
         (
-            {"num": "f8", "char": "U10"},
-            {"num": np.dtype("f8"), "char": np.dtype("U10")},
+                {"num": "f8", "char": "U10"},
+                {"num": np.dtype("f8"), "char": np.dtype("U10")},
         ),
         ({"char": "U5"}, {"num": np.dtype("f4"), "char": np.dtype("U5")}),
     ],

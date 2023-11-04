@@ -1,5 +1,5 @@
 import numpy as np
-from typing import List, Any, Optional
+from typing import List, Any, Optional, Union, overload
 from .printers import StructuredDataPrinter
 from .manipulators import StructuredArrayManipulator
 from .indexers import StructuredArrayIndexer
@@ -48,25 +48,74 @@ class MicroFrame:
         Changes the data types of specified columns.
     """
 
+    @overload
     def __init__(
-        self,
-        data: List[List[Any]],
-        dtypes: List[str],
-        columns: Optional[List[str]] = None,
-    ):
-        if not isinstance(data, list) or not all(isinstance(row, list) for row in data):
-            raise TypeError("Data must be a list of lists.")
-        if columns is not None and not isinstance(columns, list):
-            raise TypeError("Columns must be a list.")
-        if not isinstance(dtypes, list):
-            raise TypeError("Dtypes must be a list.")
+            self,
+            data: List[List[Any]],
+            dtypes: List[str],
+            columns: Optional[List[str]] = None,
+    ): ...
 
-        self.columns = self._initialize_columns(data, columns)
-        self.values = self._initialize_values(data, dtypes, self.columns)
+    @overload
+    def __init__(
+            self,
+            data: np.ndarray,
+            columns: Optional[List[str]] = None,
+    ): ...
+
+    def __init__(
+            self,
+            data: Union[List[List[Any]], np.ndarray],
+            dtypes: Optional[List[str]] = None,
+            columns: Optional[List[str]] = None,
+    ):
+        if isinstance(data, list):
+            # Original initialization with list of lists
+            if not all(isinstance(row, list) for row in data):
+                raise TypeError("Data must be a list of lists.")
+            if dtypes is None or not isinstance(dtypes, list):
+                raise TypeError("Dtypes must be a list.")
+
+            self.columns = self._initialize_columns(data, columns)
+            self.values = self._initialize_values(data, dtypes, self.columns)
+        elif isinstance(data, np.ndarray):
+            # Initialization with NumPy structured array
+            if not data.dtype.names:
+                raise TypeError("Data must be a structured numpy array with named fields.")
+            if columns is not None and not isinstance(columns, list):
+                raise TypeError("Columns must be a list.")
+
+            self.columns = self._initialize_columns_from_structured_array(data, columns)
+            self.values = data
+        else:
+            raise TypeError("Data must be a list of lists or a structured numpy array.")
+
+    @staticmethod
+    def _initialize_columns_from_structured_array(
+            data: np.ndarray, columns: Optional[List[str]] = None
+    ) -> np.ndarray:
+        """
+        Initialize the columns for the MicroFrame based on the provided structured array and columns.
+
+        :param data: A structured numpy array representing the data rows.
+        :param columns: A list of column names or None. If None, existing column names from structured array will be used.
+        :return: A numpy array of initialized column names.
+        :raises ValueError: If there's a mismatch between the data fields and the provided columns.
+        """
+        existing_columns = list(data.dtype.names)
+
+        if columns is None:
+            return np.array(existing_columns)
+        else:
+            if not all(isinstance(col, str) for col in columns):
+                raise ValueError("All column names must be of type str.")
+            if len(columns) != len(existing_columns):
+                raise ValueError("Columns and the data fields must be of equal length.")
+            return np.array(columns)
 
     @staticmethod
     def _initialize_columns(
-        data: List[List[Any]], columns: Optional[List[str]] = None
+            data: List[List[Any]], columns: Optional[List[str]] = None
     ) -> np.ndarray:
         """
         Initialize the columns for the MicroFrame based on the provided data and columns.
@@ -102,7 +151,7 @@ class MicroFrame:
 
     @staticmethod
     def _initialize_values(
-        data: List[List[Any]], dtypes: List[str], columns: np.ndarray
+            data: List[List[Any]], dtypes: List[str], columns: np.ndarray
     ) -> np.ndarray:
         """
         Initialize the values for the MicroFrame based on the provided data, dtypes, and columns.
