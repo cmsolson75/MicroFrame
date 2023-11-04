@@ -1,5 +1,5 @@
 from .utils.csv_utils import open_csv, infer_column_dtypes
-from microframe.core.microframe import MicroFrame
+from ..core.microframe import MicroFrame
 
 
 def read_csv(file_path: str) -> MicroFrame:
