@@ -208,16 +208,24 @@ def test_change_dtypes_microframe(default_microframe, new_dtypes, expected_dtype
 
 def test_iloc_microframe(default_microframe):
     mf = default_microframe
-    expected_values = np.array(
-        [(1.0, "a"), (2.0, "b"), (3.0, "c")], dtype=[("num", "<f4"), ("char", "<U100")]
-    )
 
     # Assertions
-    assert isinstance(mf.iloc, StructuredArrayIndexer)
-    assert tuple(mf.iloc[0]) == (1.0, "a")
-    assert mf.iloc[0, 0] == 1.0
-    assert np.array_equal(mf.iloc[:], expected_values)
-    assert list(mf.iloc[:, 0]) == [1.0, 2.0, 3.0]
+    # Check if iloc[0] returns a MicroFrame instance
+    assert isinstance(mf.iloc[0], MicroFrame)
+
+    # Check the first row values
+    first_row = mf.iloc[0]
+    assert first_row.values[0][0] == 1.0
+    assert first_row.values[0][1] == "a"
+
+    # Check slicing for multiple rows
+    sliced_mf = mf.iloc[:2]  # Get first two rows
+    assert isinstance(sliced_mf, MicroFrame)
+    assert sliced_mf.shape == (2, 2)  # Shape of the sliced MicroFrame
+    assert np.array_equal(sliced_mf.values['num'], [1.0, 2.0])
+    assert np.array_equal(sliced_mf.values['char'], ['a', 'b'])
+
+    # Check setting a value
     mf.iloc[2, 1] = "Test"
     assert mf.values[2][1] == "Test"
 

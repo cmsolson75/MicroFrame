@@ -48,6 +48,13 @@ class MicroFrame:
         Changes the data types of specified columns.
     """
 
+    class _MicroFrameIndexer(StructuredArrayIndexer):
+        def __getitem__(self, idx):
+            subset = super().__getitem__(idx)
+            if isinstance(subset, np.void):  # Single row
+                subset = np.array([subset], dtype=subset.dtype)
+            return MicroFrame(subset)
+
     @overload
     def __init__(
             self,
@@ -324,4 +331,4 @@ class MicroFrame:
         :return: An instance of StructuredArrayIndexer for integer-location based indexing.
         :rtype: StructuredArrayIndexer
         """
-        return StructuredArrayIndexer(self.values, self.columns)
+        return self._MicroFrameIndexer(self.values, self.columns)
