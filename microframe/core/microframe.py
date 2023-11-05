@@ -53,6 +53,12 @@ class MicroFrame:
             subset = super().__getitem__(idx)
             if isinstance(subset, np.void):  # Single row
                 subset = np.array([subset], dtype=subset.dtype)
+            elif isinstance(subset, np.ndarray) and subset.ndim == 1:  # Single column
+                # We need to check if we're actually trying to get a single column, not a single row
+                if isinstance(idx, tuple) and isinstance(idx[1], (int, np.integer)):
+                    # Create a structured array with a single named field
+                    dtype = [(self.columns[idx[1]], subset.dtype)]
+                    subset = np.array([tuple([val]) for val in subset], dtype=dtype)
             return MicroFrame(subset)
 
     @overload
