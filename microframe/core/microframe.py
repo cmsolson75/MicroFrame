@@ -2,7 +2,7 @@ import numpy as np
 from typing import List, Any, Optional, Union, overload
 from .printers import StructuredDataPrinter
 from .manipulators import StructuredArrayManipulator
-from .indexers import StructuredArrayIndexer
+from .indexers import IlocIndexer
 
 
 class MicroFrame:
@@ -48,33 +48,22 @@ class MicroFrame:
         Changes the data types of specified columns.
     """
 
-    class _MicroFrameIndexer(StructuredArrayIndexer):
-        def __getitem__(self, idx):
-            subset = super().__getitem__(idx)
-            if isinstance(subset, np.void):  # Single row
-                subset = np.array([subset], dtype=subset.dtype)
-            elif isinstance(subset, np.ndarray) and subset.ndim == 1:  # Single column
-                # We need to check if we're actually trying to get a single column, not a single row
-                if isinstance(idx, tuple) and isinstance(idx[1], (int, np.integer)):
-                    # Create a structured array with a single named field
-                    dtype = [(self.columns[idx[1]], subset.dtype)]
-                    subset = np.array([tuple([val]) for val in subset], dtype=dtype)
-            return MicroFrame(subset)
-
     @overload
     def __init__(
             self,
             data: List[List[Any]],
             dtypes: List[str],
             columns: Optional[List[str]] = None,
-    ): ...
+    ):
+        ...
 
     @overload
     def __init__(
             self,
             data: np.ndarray,
             columns: Optional[List[str]] = None,
-    ): ...
+    ):
+        ...
 
     def __init__(
             self,
@@ -330,11 +319,13 @@ class MicroFrame:
         """
         Provides integer-location based indexing for selection by position.
 
-        This property returns an instance of StructuredArrayIndexer, which allows for indexing
-        into the structured array using integer positions. It is designed to mimic the `.iloc`
-        property in pandas, providing a familiar interface for users.
+        This property returns an instance of _MicroFrameIndexer, a specialized indexer that
+        extends StructuredArrayIndexer. It allows for indexing into the structured array using
+        integer positions. When accessed, it ensures that the subset of data is returned as a
+        MicroFrame instance, maintaining the structure and functionalities of the original MicroFrame.
+        It is designed to mimic the `.iloc` property in pandas, providing a familiar interface for users.
 
-        :return: An instance of StructuredArrayIndexer for integer-location based indexing.
-        :rtype: StructuredArrayIndexer
+        :return: A MicroFrame instance representing a subset of the original data based on integer-location indexing.
+        :rtype: MicroFrame
         """
-        return self._MicroFrameIndexer(self.values, self.columns)
+        return IlocIndexer(self.values, self.columns, MicroFrame)
