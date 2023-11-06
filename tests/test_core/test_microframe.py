@@ -48,7 +48,7 @@ def test_microframe_initialization_with_structured_array():
         dtype=[('ID', 'i4'), ('Name', 'U10'), ('Age', 'f4')]
     )
 
-    microframe = MicroFrame(data=structured_data)
+    microframe = MicroFrame.from_structured_array(data=structured_data)
 
     assert isinstance(microframe, MicroFrame)
     assert all(microframe.columns == ['ID', 'Name', 'Age'])
@@ -211,7 +211,7 @@ def test_to_numpy_with_homogeneous_types(default_microframe):
     dtypes = [('field1', int), ('field2', float)]
     structured_array = np.array(data, dtype=dtypes)
 
-    microframe = MicroFrame(structured_array)
+    microframe = MicroFrame.from_structured_array(structured_array)
     result = microframe.to_numpy()
 
     expected = np.array([[1, 2.0], [3, 4.0]])
@@ -223,7 +223,7 @@ def test_to_numpy_with_heterogeneous_types(default_microframe):
     dtypes = [('field1', int), ('field2', 'U1')]
     structured_array = np.array(data, dtype=dtypes)
 
-    microframe = MicroFrame(structured_array)
+    microframe = MicroFrame.from_structured_array(structured_array)
     result = microframe.to_numpy()
 
     expected = np.array([[1, 'a'], [3, 'b']])
@@ -233,7 +233,7 @@ def test_to_numpy_with_heterogeneous_types(default_microframe):
 def test_to_numpy_empty_array(default_microframe):
     structured_array = np.array([], dtype=[('field1', int), ('field2', float)])
 
-    microframe = MicroFrame(structured_array)
+    microframe = MicroFrame.from_structured_array(structured_array)
     result = microframe.to_numpy()
 
     expected = np.empty((0, 2))

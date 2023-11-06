@@ -48,52 +48,40 @@ class MicroFrame:
         Changes the data types of specified columns.
     """
 
-    def __init__(
-            self,
-            data: Union[List[List[Any]], np.ndarray],
-            dtypes: Optional[List[str]] = None,
-            columns: Optional[List[str]] = None,
-    ):
+    def __init__(self, data: List[List[Any]], dtypes: List[str], columns: Optional[List[str]] = None):
         """
-        Initializes a new instance of the MicroFrame class.
+        Initializes a new instance of the MicroFrame class with a list of lists.
 
-        The MicroFrame class can be initialized either with a list of lists, where each inner list
-        represents a row of data, or with a structured NumPy array with named fields.
-
-        :param data: Data to initialize the MicroFrame. If a list of lists, each inner list represents a row.
-                     If a NumPy ndarray, it should be a structured array with named fields.
-        :type data: Union[List[List[Any]], np.ndarray]
-        :param dtypes: A list of data types for each column. Required if 'data' is a list of lists.
-                       Ignored if 'data' is a structured NumPy array.
-        :type dtypes: Optional[List[str]], optional
+        :param data: Data to initialize the MicroFrame. Each inner list represents a row.
+        :param dtypes: A list of data types for each column.
         :param columns: A list of column names. If None, default column names will be generated.
-                        If 'data' is a structured NumPy array, and 'columns' is None, the field names from
-                        'data' are used. If 'columns' is provided, it overrides the field names in 'data'.
-        :type columns: Optional[List[str]], optional
-        :raises TypeError: If the provided `data`, `dtypes`, or `columns` are not of the expected types or structures.
-        :raises ValueError: If there's a mismatch between the data rows and the provided columns or dtypes.
         """
-        if isinstance(data, list):
-            # Original initialization with list of lists
-            if not all(isinstance(row, list) for row in data):
-                raise TypeError("Data must be a list of lists.")
-            if dtypes is None or not isinstance(dtypes, list):
-                raise TypeError("Dtypes must be a list.")
+        if not all(isinstance(row, list) for row in data):
+            raise TypeError("Data must be a list of lists.")
+        if dtypes is None or not isinstance(dtypes, list):
+            raise TypeError("Dtypes must be a list.")
 
-            self.columns = self._initialize_columns(data, columns)
-            self.values = self._initialize_values(data, dtypes, self.columns)
+        self.columns = self._initialize_columns(data, columns)
+        self.values = self._initialize_values(data, dtypes, self.columns)
 
-        elif isinstance(data, np.ndarray):
-            # Initialization with NumPy structured array
-            if not data.dtype.names:
-                raise TypeError("Data must be a structured numpy array with named fields.")
-            if columns is not None and not isinstance(columns, list):
-                raise TypeError("Columns must be a list.")
+    @classmethod
+    def from_structured_array(cls, data: np.ndarray, columns: Optional[List[str]] = None):
+        """
+        Factory method to create a MicroFrame instance from a structured NumPy array.
 
-            self.columns = self._initialize_columns_from_structured_array(data, columns)
-            self.values = data
-        else:
-            raise TypeError("Data must be a list of lists or a structured numpy array.")
+        :param data: A structured NumPy array with named fields.
+        :param columns: A list of column names. If None, default column names will be generated.
+        :return: An instance of MicroFrame.
+        """
+        if not data.dtype.names:
+            raise TypeError("Data must be a structured numpy array with named fields.")
+        if columns is not None and not isinstance(columns, list):
+            raise TypeError("Columns must be a list.")
+
+        instance = cls.__new__(cls)
+        instance.columns = cls._initialize_columns_from_structured_array(data, columns)
+        instance.values = data
+        return instance
 
     @staticmethod
     def _initialize_columns_from_structured_array(

@@ -86,4 +86,4 @@ class IlocIndexer(Generic[T], StructuredArrayIndexer):
                 # Create a structured array with a single named field
                 dtype = [(self.columns[idx[1]], subset.dtype)]
                 subset = np.array([tuple([val]) for val in subset], dtype=dtype)
-        return self.return_type(subset)
+        return self.return_type.from_structured_array(subset)
