@@ -277,6 +277,19 @@ class MicroFrame:
         manipulator.change_dtypes(dtypes_dict)
         self.values = manipulator.values
 
+    def to_numpy(self):
+        """
+        Converts the MicroFrame to a regular 2D NumPy array (matrix).
+
+        This conversion will result in a 2D NumPy array with each column corresponding to a field in the MicroFrame.
+        All fields must be of a type that can be cast to a common dtype.
+
+        :return: A 2D NumPy array representation of the MicroFrame data.
+        :rtype: numpy.ndarray
+        """
+        manipulator = StructuredArrayManipulator(self.values, self.columns)
+        return manipulator.to_numpy()
+
     @property
     def dtypes(self):
         """

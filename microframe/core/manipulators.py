@@ -84,3 +84,21 @@ class StructuredArrayManipulator:
             self.values = new_values
         except ValueError as e:
             raise ArrayManipulationError(f"TypeError: {e}")
+
+    def to_numpy(self):
+        """
+        Converts the structured array to a regular 2D NumPy array (matrix).
+
+        This conversion will result in a 2D NumPy array with each column corresponding to a field in the structured array.
+        All fields must be of a type that can be cast to a common dtype.
+
+        :return: A 2D NumPy array representation of the structured array.
+        :rtype: numpy.ndarray
+        :raises ArrayManipulationError: If the conversion is not possible due to incompatible data types.
+        """
+        try:
+            # Extract each column and stack them horizontally to form a 2D array
+            columns = [self.values[field] for field in self.values.dtype.names]
+            return np.column_stack(columns)
+        except ValueError as e:
+            raise ArrayManipulationError(f"Error in converting to a regular 2D NumPy array: {e}")

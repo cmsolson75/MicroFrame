@@ -206,6 +206,40 @@ def test_change_dtypes_microframe(default_microframe, new_dtypes, expected_dtype
         assert microframe.values.dtype[column] == expected_dtype
 
 
+def test_to_numpy_with_homogeneous_types(default_microframe):
+    data = [(1, 2.0), (3, 4.0)]
+    dtypes = [('field1', int), ('field2', float)]
+    structured_array = np.array(data, dtype=dtypes)
+
+    microframe = MicroFrame(structured_array)
+    result = microframe.to_numpy()
+
+    expected = np.array([[1, 2.0], [3, 4.0]])
+    np.testing.assert_array_equal(result, expected)
+
+
+def test_to_numpy_with_heterogeneous_types(default_microframe):
+    data = [(1, 'a'), (3, 'b')]
+    dtypes = [('field1', int), ('field2', 'U1')]
+    structured_array = np.array(data, dtype=dtypes)
+
+    microframe = MicroFrame(structured_array)
+    result = microframe.to_numpy()
+
+    expected = np.array([[1, 'a'], [3, 'b']])
+    np.testing.assert_array_equal(result, expected)
+
+
+def test_to_numpy_empty_array(default_microframe):
+    structured_array = np.array([], dtype=[('field1', int), ('field2', float)])
+
+    microframe = MicroFrame(structured_array)
+    result = microframe.to_numpy()
+
+    expected = np.empty((0, 2))
+    np.testing.assert_array_equal(result, expected)
+
+
 def test_iloc_microframe(default_microframe):
     mf = default_microframe
 

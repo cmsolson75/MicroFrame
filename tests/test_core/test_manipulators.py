@@ -103,3 +103,24 @@ def test_change_dtypes_for_nonexistent_column(default_manipulator):
     # Expect ArrayManipulationError to be raised due to non-existent column
     with pytest.raises(ArrayManipulationError):
         manipulator.change_dtypes(dtypes_for_nonexistent_column)
+
+
+def test_to_numpy_success(default_manipulator):
+    result = default_manipulator.to_numpy()
+
+    # Expected result is a 2D NumPy array with the same values
+    expected = np.array([[1, "a"], [2, "b"], [3, "c"]])
+
+    # Since we are dealing with heterogeneous types, we need to compare the string representation
+    np.testing.assert_array_equal(result.astype(str), expected.astype(str))
+
+
+def test_to_numpy_empty_array():
+    empty_values = np.array([], dtype=[("num", "i4"), ("char", "U1")])
+    empty_manipulator = StructuredArrayManipulator(empty_values, ["num", "char"])
+    result = empty_manipulator.to_numpy()
+
+    expected = np.empty((0, 2))
+    np.testing.assert_array_equal(result, expected)
+
+
