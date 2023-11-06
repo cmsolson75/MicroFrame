@@ -1,5 +1,5 @@
 import numpy as np
-from typing import List, Any, Optional, Union
+from typing import List, Any, Optional
 from .printers import StructuredDataPrinter
 from .manipulators import StructuredArrayManipulator
 from .indexers import IlocIndexer
