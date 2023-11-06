@@ -1,5 +1,5 @@
 import numpy as np
-from typing import List, Any, Optional, Union, overload
+from typing import List, Any, Optional, Union
 from .printers import StructuredDataPrinter
 from .manipulators import StructuredArrayManipulator
 from .indexers import IlocIndexer
@@ -48,29 +48,31 @@ class MicroFrame:
         Changes the data types of specified columns.
     """
 
-    @overload
-    def __init__(
-            self,
-            data: List[List[Any]],
-            dtypes: List[str],
-            columns: Optional[List[str]] = None,
-    ):
-        ...
-
-    @overload
-    def __init__(
-            self,
-            data: np.ndarray,
-            columns: Optional[List[str]] = None,
-    ):
-        ...
-
     def __init__(
             self,
             data: Union[List[List[Any]], np.ndarray],
             dtypes: Optional[List[str]] = None,
             columns: Optional[List[str]] = None,
     ):
+        """
+        Initializes a new instance of the MicroFrame class.
+
+        The MicroFrame class can be initialized either with a list of lists, where each inner list
+        represents a row of data, or with a structured NumPy array with named fields.
+
+        :param data: Data to initialize the MicroFrame. If a list of lists, each inner list represents a row.
+                     If a NumPy ndarray, it should be a structured array with named fields.
+        :type data: Union[List[List[Any]], np.ndarray]
+        :param dtypes: A list of data types for each column. Required if 'data' is a list of lists.
+                       Ignored if 'data' is a structured NumPy array.
+        :type dtypes: Optional[List[str]], optional
+        :param columns: A list of column names. If None, default column names will be generated.
+                        If 'data' is a structured NumPy array, and 'columns' is None, the field names from
+                        'data' are used. If 'columns' is provided, it overrides the field names in 'data'.
+        :type columns: Optional[List[str]], optional
+        :raises TypeError: If the provided `data`, `dtypes`, or `columns` are not of the expected types or structures.
+        :raises ValueError: If there's a mismatch between the data rows and the provided columns or dtypes.
+        """
         if isinstance(data, list):
             # Original initialization with list of lists
             if not all(isinstance(row, list) for row in data):
@@ -80,6 +82,7 @@ class MicroFrame:
 
             self.columns = self._initialize_columns(data, columns)
             self.values = self._initialize_values(data, dtypes, self.columns)
+
         elif isinstance(data, np.ndarray):
             # Initialization with NumPy structured array
             if not data.dtype.names:
@@ -100,9 +103,11 @@ class MicroFrame:
         Initialize the columns for the MicroFrame based on the provided structured array and columns.
 
         :param data: A structured numpy array representing the data rows.
-        :param columns: A list of column names or None. If None, existing column names from structured array will be used.
+        :param columns: A list of column names or None. If None, existing column names from
+        structured array will be used.
         :return: A numpy array of initialized column names.
-        :raises ValueError: If there's a mismatch between the data fields and the provided columns.
+        :raises ValueError: If there's a mismatch between the data fields and the provided
+        columns.
         """
         existing_columns = list(data.dtype.names)
 
@@ -273,7 +278,7 @@ class MicroFrame:
         self.values = manipulator.values
 
     @property
-    def types(self):
+    def dtypes(self):
         """
         Returns the data types of the columns in the MicroFrame.
 
@@ -319,13 +324,14 @@ class MicroFrame:
         """
         Provides integer-location based indexing for selection by position.
 
-        This property returns an instance of _MicroFrameIndexer, a specialized indexer that
-        extends StructuredArrayIndexer. It allows for indexing into the structured array using
-        integer positions. When accessed, it ensures that the subset of data is returned as a
-        MicroFrame instance, maintaining the structure and functionalities of the original MicroFrame.
-        It is designed to mimic the `.iloc` property in pandas, providing a familiar interface for users.
+        This property returns an instance of IlocIndexer, which is specialized for integer-location
+        based indexing. It enables the selection of subsets of the MicroFrame's data by integer
+        position, similar to the `.iloc` property in pandas DataFrames.
 
-        :return: A MicroFrame instance representing a subset of the original data based on integer-location indexing.
-        :rtype: MicroFrame
+        When accessed, this property ensures that the subset of data is returned as a MicroFrame
+        instance, maintaining the structure and functionalities of the original MicroFrame.
+
+        :return: An instance of IlocIndexer for integer-location based indexing.
+        :rtype: IlocIndexer
         """
         return IlocIndexer(self.values, self.columns, MicroFrame)

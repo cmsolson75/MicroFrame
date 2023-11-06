@@ -32,7 +32,7 @@ def test_microframe_initialization(default_microframe):
 
     # Test types property
     assert np.array_equal(
-        microframe.types, np.dtype([("num", "<f4"), ("char", "<U100")])
+        microframe.dtypes, np.dtype([("num", "<f4"), ("char", "<U100")])
     )
 
     # Test shape property
@@ -162,7 +162,7 @@ def test_initialize_values_with_mismatched_data_and_columns():
 def test_properties_microframe(default_microframe):
     mf = default_microframe
     # Assertions
-    assert mf.types == mf.values.dtype
+    assert mf.dtypes == mf.values.dtype
     assert mf.count == len(mf.values)
     assert mf.shape == (len(mf.values), len(mf.columns))
 

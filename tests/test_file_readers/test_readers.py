@@ -37,8 +37,8 @@ def test_infer_data_types(tmpdir):
     file_path = tmpdir.join("datatypes.csv")
     file_path.write("Integers,Floats,Strings\n1,3.14,Hello\n2,2.71,World")
     microframe = read_csv(str(file_path))
-    assert microframe.types["Floats"] == np.float32
-    assert microframe.types["Strings"] == "U100"
+    assert microframe.dtypes["Floats"] == np.float32
+    assert microframe.dtypes["Strings"] == "U100"
 
 
 def test_incorrect_csv_content_format(tmpdir):
