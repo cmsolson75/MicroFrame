@@ -8,7 +8,7 @@ def default_manipulator():
     values = np.array(
         [(1, "a"), (2, "b"), (3, "c")], dtype=[("num", "i4"), ("char", "U1")]
     )
-    columns = ["num", "char"]
+    columns = np.array(["num", "char"])
     manipulator = StructuredArrayManipulator(values, columns)
     return manipulator
 
@@ -17,12 +17,12 @@ def test_structured_array_manipulator_initialization():
     local_values = np.array(
         [(1, "a"), (2, "b"), (3, "c")], dtype=[("num", "i4"), ("char", "U1")]
     )
-    local_columns = ["num", "char"]
+    local_columns = np.array(["num", "char"])
 
     local_manipulator = StructuredArrayManipulator(local_values, local_columns)
     assert isinstance(local_manipulator, StructuredArrayManipulator)
     assert local_manipulator.values is local_values
-    assert local_manipulator.columns == local_columns
+    assert local_manipulator.columns is local_columns
 
 
 @pytest.mark.parametrize(
@@ -117,10 +117,9 @@ def test_to_numpy_success(default_manipulator):
 
 def test_to_numpy_empty_array():
     empty_values = np.array([], dtype=[("num", "i4"), ("char", "U1")])
-    empty_manipulator = StructuredArrayManipulator(empty_values, ["num", "char"])
+    empty_manipulator = StructuredArrayManipulator(empty_values, np.array(["num", "char"]))
     result = empty_manipulator.to_numpy()
 
     expected = np.empty((0, 2))
     np.testing.assert_array_equal(result, expected)
-
 

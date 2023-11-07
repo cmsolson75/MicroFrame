@@ -1,5 +1,5 @@
 import numpy as np
-from typing import TypeVar, Generic, Type
+from typing import TypeVar, Generic, Type, Union, Any, List
 
 
 class StructuredArrayIndexer:
@@ -9,19 +9,25 @@ class StructuredArrayIndexer:
     :param values: The numpy structured array to be indexed.
     :type values: numpy.ndarray
     :param columns: Column names corresponding to the data.
-    :type columns: list
+    :type columns: numpy.ndarray
     """
 
-    def __init__(self, values, columns):
+    def __init__(self, values: np.ndarray, columns: np.ndarray):
         """
         Initializes the StructuredArrayIndexer with the structured array and its column names.
         """
         self.values = values
         self.columns = columns
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: Union[int, tuple]) -> Any:
         """
         Retrieve an item or a row from the structured array.
+
+        The idx parameter supports multiple indexing modes:
+            - Single integer for a row: `data[5]`
+            - Tuple with row and column index: `data[5, 3]`
+            - Tuple with row index and column slice: `data[5, 1:4]`
+            - Slice for multiple rows: `data[1:5]`
 
         :param idx: Either a single index to retrieve a row, or a tuple of row and column indices to retrieve an item.
         :type idx: int or tuple
@@ -38,7 +44,7 @@ class StructuredArrayIndexer:
         column_name = self.columns[col_idx]
         return self.values[row_idx][column_name]
 
-    def __setitem__(self, idx, value):
+    def __setitem__(self, idx: tuple, value: Any) -> None:
         """
         Set a value in the structured array at the specified index.
 

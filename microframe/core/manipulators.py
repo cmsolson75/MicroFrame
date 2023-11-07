@@ -14,17 +14,17 @@ class StructuredArrayManipulator:
     :param values: The numpy structured array to be manipulated.
     :type values: numpy.ndarray
     :param columns: Column names corresponding to the data.
-    :type columns: list
+    :type columns: numpy.ndarray
     """
 
-    def __init__(self, values, columns):
+    def __init__(self, values: np.ndarray, columns: np.ndarray):
         """
         Initializes the StructuredArrayManipulator with the structured array and its column names.
         """
         self.values = values
         self.columns = columns
 
-    def rename(self, new_columns):
+    def rename(self, new_columns: dict) -> None:
         """
         Renames columns in the structured array based on a provided mapping.
 
@@ -54,7 +54,7 @@ class StructuredArrayManipulator:
         )
         self.columns = new_columns_array
 
-    def change_dtypes(self, dtypes_dict):
+    def change_dtypes(self, dtypes_dict: dict) -> None:
         """
         Changes the data types of specified columns in the structured array.
 

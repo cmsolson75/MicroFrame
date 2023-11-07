@@ -306,3 +306,25 @@ def test_getitem_microframe(default_microframe):
     mf = default_microframe
 
     assert list(mf["num"]) == [1.0, 2.0, 3.0]
+
+
+def test_describe_microframe(capsys):
+    # Setup known data in MicroFrame instance
+    data = [[1, 10.0], [2, 20.0], [3, 30.0]]
+    dtypes = ["int32", "float64"]
+    columns = ["int_col", "float_col"]
+    mf = MicroFrame(data, dtypes, columns)
+
+    # Invoke describe
+    mf.describe()
+
+    # Capture the output and verify it
+    captured = capsys.readouterr()
+
+    # Verify that the expected summary statistics are in the output
+    assert "int_col" in captured.out and "float_col" in captured.out
+    assert "count" in captured.out and "3" in captured.out
+    assert "mean" in captured.out and "2.0" in captured.out and "20.0" in captured.out
+    assert "std" in captured.out and "1.0" in captured.out and "10.0" in captured.out
+    assert "min" in captured.out and "1" in captured.out and "10.0" in captured.out
+    assert "max" in captured.out and "3" in captured.out and "30.0" in captured.out

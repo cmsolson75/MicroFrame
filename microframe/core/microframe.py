@@ -278,6 +278,65 @@ class MicroFrame:
         manipulator = StructuredArrayManipulator(self.values, self.columns)
         return manipulator.to_numpy()
 
+    def describe(self):
+        """
+        Generates descriptive statistics summarizing the central tendency,
+        dispersion, and shape of the dataset's distribution, excluding NaN values.
+
+        This method targets numeric data and provides an overview of statistical
+        characteristics of numeric columns, including count, mean, standard deviation,
+        minimum, and maximum values.
+
+        NaN values are excluded from the calculations. The results are printed in a
+        tabular format to the console.
+
+        **Statistics computed:**
+
+        - *count*: The number of non-NaN values.
+        - *mean*: The mean of the values.
+        - *std*: The sample standard deviation of the values.
+        - *min*: The minimum value.
+        - *max*: The maximum value.
+
+        The method prints the summary to the console and does not return a value.
+
+        :raises TypeError: If columns contain types that cannot be converted to float.
+        :raises ValueError: If computations encounter issues like an empty column.
+        """
+        # Identify numeric columns and their data types
+        numeric_columns = [name for (name, dtype) in self.values.dtype.fields.items() if
+                           np.issubdtype(dtype[0], np.number)]
+
+        # Initialize statistics dictionary
+        stats = {
+            "count": [],
+            "mean": [],
+            "std": [],
+            "min": [],
+            "max": [],
+        }
+        for key in stats.keys():
+            stats[key].append(key)
+
+        # Compute statistics for each numeric column, excluding NaN values
+        for col in numeric_columns:
+            column_data = self.values[col].astype(float)  # Convert to float for calculations
+            valid_data = column_data[~np.isnan(column_data)]  # Exclude NaN values
+            stats["count"].append(np.count_nonzero(~np.isnan(column_data)))
+            stats["mean"].append(np.round(np.nanmean(column_data), 3))
+            stats["std"].append(
+                np.round(np.nanstd(column_data, ddof=1), 3))  # Sample standard deviation excluding NaN
+            stats["min"].append(np.round(np.nanmin(column_data), 3))
+            stats["max"].append(np.round(np.nanmax(column_data), 3))
+
+        # Prepare the data for printing
+        data = [value for value in stats.values()]
+        headers = ['stats'] + numeric_columns
+
+        # Print the statistics using StructuredDataPrinter
+        summary_printer = StructuredDataPrinter(data, columns=headers, max_value_length=20)
+        summary_printer.structured_print(max_width=80, num_cols=None, num_rows=10)
+
     @property
     def dtypes(self):
         """
