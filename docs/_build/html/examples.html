@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API Documentation" href="api_overview.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="microframe.readers package" href="api/microframe_readers.html" />
 
     <link rel="shortcut icon" href="_static/Logo.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>MicroFrame 1.0 Documentation</title>
+        <title>Examples - MicroFrame 1.0 Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=10e673fd" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">MicroFrame 1.0 Documentation</div></a>
+      <a href="index.html"><div class="brand">MicroFrame 1.0 Documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -134,7 +134,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -143,7 +143,7 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   
   
   <span class="sidebar-brand-text">MicroFrame 1.0 Documentation</span>
@@ -161,8 +161,8 @@
 </ul>
 </li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Examples</a></li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/cmsolson75/MicroFrame">GitHub Repo</a></li>
 </ul>
 
@@ -192,72 +192,88 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="welcome-to-microframe-s-documentation">
-<h1>Welcome to Microframe’s Documentation!<a class="headerlink" href="#welcome-to-microframe-s-documentation" title="Link to this heading">#</a></h1>
-</section>
-<section id="microframe">
-<h1>MicroFrame<a class="headerlink" href="#microframe" title="Link to this heading">#</a></h1>
-<p>MicroFrame is a lightweight, efficient data manipulation library in Python, designed for handling structured data with ease. Inspired by the functionality of pandas, MicroFrame offers a simplified approach to data manipulation, making it ideal for small to medium-sized datasets.</p>
-<section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>CSV Reading</strong>: Read CSV files efficiently and construct MicroFrame objects with ease.</p></li>
-<li><p><strong>Data Type Inference</strong>: Automatically infer the data types of columns based on the first row of the data.</p></li>
-<li><p><strong>MicroFrame Objects</strong>: Work with data encapsulated in MicroFrame objects that offer flexibility and powerful analytical capabilities.</p></li>
-<li><p><strong>Tabular Printout</strong>: Enjoy clear and organized tabular printouts of your data for easy analysis and presentation.</p></li>
-<li><p><strong>Data Manipulation</strong>: Leverage robust data manipulation tools to transform and analyze your datasets effectively.</p></li>
-</ul>
-</section>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>To install MicroFrame from the GitHub repository, follow these steps:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/cmsolson75/MicroFrame.git
-<span class="nb">cd</span><span class="w"> </span>MicroFrame
-pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+          <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
+<p>Here’s how to get started with Microframe:</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<section id="reading-a-csv-file">
+<h3>Reading a CSV File<a class="headerlink" href="#reading-a-csv-file" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microframe.readers</span> <span class="kn">import</span> <span class="n">read_csv</span>
+
+<span class="c1"># Read a CSV file and construct a MicroFrame object</span>
+<span class="n">microframe</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path/to/your/file.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Now you can work with microframe as needed</span>
+<span class="c1"># For example, print the head of the table</span>
+<span class="n">microframe</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Ensure you have Python 3.x installed on your system to use MicroFrame.</p>
 </section>
-<section id="api-reference">
-<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="api_overview.html">API Documentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api_overview.html#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
+<section id="instantiating-a-microframe-object">
+<h3>Instantiating a MicroFrame Object<a class="headerlink" href="#instantiating-a-microframe-object" title="Link to this heading">#</a></h3>
+<p>You can create a MicroFrame object manually by providing data, data types, and column names:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">microframe.core.microframe</span> <span class="kn">import</span> <span class="n">MicroFrame</span>
+
+<span class="c1"># Sample data to be encapsulated in the MicroFrame object</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="s2">&quot;2023-01-01&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">,</span> <span class="s2">&quot;2023-01-02&quot;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;Charlie&quot;</span><span class="p">,</span> <span class="s2">&quot;2023-01-03&quot;</span><span class="p">]</span>
+<span class="p">]</span>
+<span class="n">dtypes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;int32&quot;</span><span class="p">,</span> <span class="s2">&quot;U100&quot;</span><span class="p">,</span> <span class="s2">&quot;U100&quot;</span><span class="p">]</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Date&quot;</span><span class="p">]</span>
+
+<span class="c1"># Creating a MicroFrame object</span>
+<span class="n">microframe</span> <span class="o">=</span> <span class="n">MicroFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+</pre></div>
 </div>
 </section>
-<section id="documentation">
-<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#id1">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#contributing">Contributing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#license">License</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference external" href="https://github.com/cmsolson75/MicroFrame">GitHub Repo</a></li>
-</ul>
+<section id="using-the-printer-class">
+<h3>Using the Printer Class<a class="headerlink" href="#using-the-printer-class" title="Link to this heading">#</a></h3>
+<p>To print out your data in a tabular format, you can use the Printer class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">microframe.core.printers</span> <span class="kn">import</span> <span class="n">StructuredDataPrinter</span>
+
+<span class="c1"># Sample structured data</span>
+<span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">)],</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;i4&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;char&quot;</span><span class="p">,</span> <span class="s2">&quot;U1&quot;</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">]</span>
+
+<span class="c1"># Creating a Printer instance</span>
+<span class="n">printer</span> <span class="o">=</span> <span class="n">StructuredDataPrinter</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+
+<span class="c1"># Print a tabular view of your data</span>
+<span class="n">printer</span><span class="o">.</span><span class="n">print_table</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For more detailed examples and usage, please refer to the <a class="reference external" href="https://cmsolson75.github.io/MicroFrame/">Documentation</a>.</p>
+</section>
+</section>
+<section id="id1">
+<h2>Documentation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>For full documentation, visit our <a class="reference external" href="https://cmsolson75.github.io/MicroFrame/">MicroFrame Documentation</a>. Here, you will find detailed information on all the functionalities that MicroFrame offers.</p>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h2>
+<p>We welcome contributions to MicroFrame! If you have ideas for improvements or want to help out with development, please read our contributing guidelines and submit your pull requests.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<p>MicroFrame is released under the <a class="reference external" href="#">MIT License</a>. Feel free to use it in your projects, and we’d love to hear about what you build!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">microframe</span>
+<span class="c1"># example usage</span>
+</pre></div>
 </div>
 </section>
-</section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
 </section>
 
         </article>
@@ -265,16 +281,18 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="api_overview.html">
+          
+          <a class="prev-page" href="api/microframe_readers.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
-                  <span>Next</span>
+                  <span>Previous</span>
                 </div>
-                <div class="title">API Documentation</div>
+                
+                <div class="title">microframe.readers package</div>
+                
               </div>
-              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -293,8 +311,35 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Examples</a><ul>
+<li><a class="reference internal" href="#usage">Usage</a><ul>
+<li><a class="reference internal" href="#reading-a-csv-file">Reading a CSV File</a></li>
+<li><a class="reference internal" href="#instantiating-a-microframe-object">Instantiating a MicroFrame Object</a></li>
+<li><a class="reference internal" href="#using-the-printer-class">Using the Printer Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Documentation</a></li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

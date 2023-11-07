@@ -1,0 +1,710 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="microframe.readers package" href="microframe_readers.html" /><link rel="prev" title="API Documentation" href="../api_overview.html" />
+
+    <link rel="shortcut icon" href="../_static/Logo.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>microframe.core package - MicroFrame 1.0 Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=10e673fd" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">MicroFrame 1.0 Documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">MicroFrame 1.0 Documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_overview.html">API Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">microframe.core package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="microframe_readers.html">microframe.readers package</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/cmsolson75/MicroFrame">GitHub Repo</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="microframe-core-package">
+<h1>microframe.core package<a class="headerlink" href="#microframe-core-package" title="Link to this heading">#</a></h1>
+<p>The <cite>microframe.core</cite> package includes a variety of submodules for handling the core functionality of the Microframe library. These submodules provide foundational classes and functions that are essential for the operation of the Microframe ecosystem.</p>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="microframe-core-module">
+<h2>Microframe Core Module<a class="headerlink" href="#microframe-core-module" title="Link to this heading">#</a></h2>
+<p>The <cite>microframe.core.microframe</cite> module is the central module containing core classes and functions.</p>
+<dl class="py class" id="module-microframe.core.microframe">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microframe.core.microframe.</span></span><span class="sig-name descname"><span class="pre">MicroFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtypes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A lightweight and efficient data structure for handling tabular data.</p>
+<p>The MicroFrame class provides a simple yet powerful interface for manipulating and displaying structured data. It
+is designed to be intuitive for users familiar with pandas DataFrame but aims to be more memory-efficient and
+faster for smaller datasets.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>data<span class="classifier">List[List[Any]]</span></dt><dd><p>A list of lists representing the rows of data.</p>
+</dd>
+<dt>dtypes<span class="classifier">List[str]</span></dt><dd><p>A list of data types for each column.</p>
+</dd>
+<dt>columns<span class="classifier">Optional[List[str]], optional</span></dt><dd><p>A list of column names. If None, default column names will be generated.</p>
+</dd>
+</dl>
+</section>
+<section id="raises">
+<h3>Raises<a class="headerlink" href="#raises" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>TypeError</dt><dd><p>If the provided <cite>data</cite>, <cite>dtypes</cite>, or <cite>columns</cite> are not lists, or if the <cite>data</cite> is not a list of lists.</p>
+</dd>
+<dt>ValueError</dt><dd><p>If there’s a mismatch between the data rows and the provided columns or dtypes.</p>
+</dd>
+</dl>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>columns<span class="classifier">np.ndarray</span></dt><dd><p>An array of column names.</p>
+</dd>
+<dt>values<span class="classifier">np.ndarray</span></dt><dd><p>A structured numpy array representing the data.</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h3>
+<dl class="simple">
+<dt>head(max_width=80, num_cols=None, num_rows=5)</dt><dd><p>Prints the first <cite>num_rows</cite> rows of the MicroFrame.</p>
+</dd>
+<dt>tail(max_width=80, num_cols=None, num_rows=5)</dt><dd><p>Prints the last <cite>num_rows</cite> rows of the MicroFrame.</p>
+</dd>
+<dt>rename(new_columns)</dt><dd><p>Renames the columns of the MicroFrame.</p>
+</dd>
+<dt>change_dtypes(dtypes_dict)</dt><dd><p>Changes the data types of specified columns.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.change_dtypes">
+<span class="sig-name descname"><span class="pre">change_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtypes_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.change_dtypes" title="Link to this definition">#</a></dt>
+<dd><p>Changes the data types of the columns of the MicroFrame.</p>
+<p>This method uses the StructuredArrayManipulator class to change the data types
+of the columns of the MicroFrame based on the provided mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dtypes_dict</strong> – A dictionary mapping column names to their new data types.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.count">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">count</span></span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.count" title="Link to this definition">#</a></dt>
+<dd><p>Returns the number of rows in the MicroFrame.</p>
+<p>This property is useful for quickly determining the size of the dataset
+without having to inspect the underlying numpy array directly.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of rows in the MicroFrame.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.describe">
+<span class="sig-name descname"><span class="pre">describe</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.describe" title="Link to this definition">#</a></dt>
+<dd><p>Generates descriptive statistics summarizing the central tendency,
+dispersion, and shape of the dataset’s distribution, excluding NaN values.</p>
+<p>This method targets numeric data and provides an overview of statistical
+characteristics of numeric columns, including count, mean, standard deviation,
+minimum, and maximum values.</p>
+<p>NaN values are excluded from the calculations. The results are printed in a
+tabular format to the console.</p>
+<p><strong>Statistics computed:</strong></p>
+<ul class="simple">
+<li><p><em>count</em>: The number of non-NaN values.</p></li>
+<li><p><em>mean</em>: The mean of the values.</p></li>
+<li><p><em>std</em>: The sample standard deviation of the values.</p></li>
+<li><p><em>min</em>: The minimum value.</p></li>
+<li><p><em>max</em>: The maximum value.</p></li>
+</ul>
+<p>The method prints the summary to the console and does not return a value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If columns contain types that cannot be converted to float.</p></li>
+<li><p><strong>ValueError</strong> – If computations encounter issues like an empty column.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.dtypes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtypes</span></span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.dtypes" title="Link to this definition">#</a></dt>
+<dd><p>Returns the data types of the columns in the MicroFrame.</p>
+<p>This property provides a convenient way to access the data types (dtypes)
+of the underlying structured numpy array. Each column’s data type is returned
+in a numpy dtype object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The data types of the columns.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.dtype</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.from_structured_array">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_structured_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.from_structured_array" title="Link to this definition">#</a></dt>
+<dd><p>Factory method to create a MicroFrame instance from a structured NumPy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> – A structured NumPy array with named fields.</p></li>
+<li><p><strong>columns</strong> – A list of column names. If None, default column names will be generated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An instance of MicroFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.head">
+<span class="sig-name descname"><span class="pre">head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rows</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.head" title="Link to this definition">#</a></dt>
+<dd><p>Displays the first few rows of the MicroFrame.</p>
+<p>This method uses the StructuredDataPrinter class to provide a tabular representation
+of the first few rows of the MicroFrame, similar to the <cite>.head()</cite> method in pandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_width</strong> – Maximum width of the printed table in characters.</p></li>
+<li><p><strong>num_cols</strong> – Number of columns to display. If None, all columns are displayed.</p></li>
+<li><p><strong>num_rows</strong> – Number of rows to display.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.iloc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">iloc</span></span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.iloc" title="Link to this definition">#</a></dt>
+<dd><p>Provides integer-location based indexing for selection by position.</p>
+<p>This property returns an instance of IlocIndexer, which is specialized for integer-location
+based indexing. It enables the selection of subsets of the MicroFrame’s data by integer
+position, similar to the <cite>.iloc</cite> property in pandas DataFrames.</p>
+<p>When accessed, this property ensures that the subset of data is returned as a MicroFrame
+instance, maintaining the structure and functionalities of the original MicroFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An instance of IlocIndexer for integer-location based indexing.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#microframe.core.indexers.IlocIndexer" title="microframe.core.indexers.IlocIndexer">IlocIndexer</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.rename">
+<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_columns</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.rename" title="Link to this definition">#</a></dt>
+<dd><p>Renames the columns of the MicroFrame.</p>
+<p>This method uses the StructuredArrayManipulator class to rename the columns of
+the MicroFrame based on the provided mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_columns</strong> – A dictionary mapping old column names to new column names.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.shape">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.shape" title="Link to this definition">#</a></dt>
+<dd><p>Returns the shape of the MicroFrame as a tuple.</p>
+<p>This property mimics the <cite>.shape</cite> attribute of numpy arrays and pandas
+DataFrames, providing a familiar interface for users. The shape is returned
+as a tuple where the first element is the number of rows and the second
+element is the number of columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The shape of the MicroFrame.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.tail">
+<span class="sig-name descname"><span class="pre">tail</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.tail" title="Link to this definition">#</a></dt>
+<dd><p>Displays the last few rows of the MicroFrame.</p>
+<p>This method uses the StructuredDataPrinter class to provide a tabular representation
+of the last few rows of the MicroFrame, similar to the <cite>.tail()</cite> method in pandas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_width</strong> – Maximum width of the printed table in characters.</p></li>
+<li><p><strong>num_cols</strong> – Number of columns to display. If None, all columns are displayed.</p></li>
+<li><p><strong>num_rows</strong> – Number of rows to display.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.microframe.MicroFrame.to_numpy">
+<span class="sig-name descname"><span class="pre">to_numpy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.microframe.MicroFrame.to_numpy" title="Link to this definition">#</a></dt>
+<dd><p>Converts the MicroFrame to a regular 2D NumPy array (matrix).</p>
+<p>This conversion will result in a 2D NumPy array with each column corresponding to a field in the MicroFrame.
+All fields must be of a type that can be cast to a common dtype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 2D NumPy array representation of the MicroFrame data.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+<section id="indexers-module">
+<h2>Indexers Module<a class="headerlink" href="#indexers-module" title="Link to this heading">#</a></h2>
+<p>The <cite>indexers</cite> submodule provides functionality for indexing data within the Microframe framework.</p>
+<dl class="py class" id="module-microframe.core.indexers">
+<dt class="sig sig-object py" id="microframe.core.indexers.IlocIndexer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microframe.core.indexers.</span></span><span class="sig-name descname"><span class="pre">IlocIndexer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.indexers.IlocIndexer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>], <a class="reference internal" href="#microframe.core.indexers.StructuredArrayIndexer" title="microframe.core.indexers.StructuredArrayIndexer"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructuredArrayIndexer</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="microframe.core.indexers.StructuredArrayIndexer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microframe.core.indexers.</span></span><span class="sig-name descname"><span class="pre">StructuredArrayIndexer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.indexers.StructuredArrayIndexer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for indexing into numpy structured arrays using both row and column indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>numpy.ndarray</em>) – The numpy structured array to be indexed.</p></li>
+<li><p><strong>columns</strong> (<em>numpy.ndarray</em>) – Column names corresponding to the data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="manipulators-module">
+<h2>Manipulators Module<a class="headerlink" href="#manipulators-module" title="Link to this heading">#</a></h2>
+<p>The <cite>manipulators</cite> submodule contains tools to manipulate data structures within Microframe.</p>
+<dl class="py exception" id="module-microframe.core.manipulators">
+<dt class="sig sig-object py" id="microframe.core.manipulators.ArrayManipulationError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microframe.core.manipulators.</span></span><span class="sig-name descname"><span class="pre">ArrayManipulationError</span></span><a class="headerlink" href="#microframe.core.manipulators.ArrayManipulationError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there’s an error during Structured Array manipulation</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="microframe.core.manipulators.StructuredArrayManipulator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microframe.core.manipulators.</span></span><span class="sig-name descname"><span class="pre">StructuredArrayManipulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.manipulators.StructuredArrayManipulator" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for manipulating numpy structured arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>numpy.ndarray</em>) – The numpy structured array to be manipulated.</p></li>
+<li><p><strong>columns</strong> (<em>numpy.ndarray</em>) – Column names corresponding to the data.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.manipulators.StructuredArrayManipulator.change_dtypes">
+<span class="sig-name descname"><span class="pre">change_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dtypes_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#microframe.core.manipulators.StructuredArrayManipulator.change_dtypes" title="Link to this definition">#</a></dt>
+<dd><p>Changes the data types of specified columns in the structured array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dtypes_dict</strong> (<em>dict</em>) – A dictionary mapping column names to their new data types.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#microframe.core.manipulators.ArrayManipulationError" title="microframe.core.manipulators.ArrayManipulationError"><strong>ArrayManipulationError</strong></a> – If the column doesn’t exist or the type conversion is invalid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.manipulators.StructuredArrayManipulator.rename">
+<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_columns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#microframe.core.manipulators.StructuredArrayManipulator.rename" title="Link to this definition">#</a></dt>
+<dd><p>Renames columns in the structured array based on a provided mapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_columns</strong> (<em>dict</em>) – A dictionary mapping old column names to new column names.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#microframe.core.manipulators.ArrayManipulationError" title="microframe.core.manipulators.ArrayManipulationError"><strong>ArrayManipulationError</strong></a> – If the old column name doesn’t exist or the new column name already exists.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.manipulators.StructuredArrayManipulator.to_numpy">
+<span class="sig-name descname"><span class="pre">to_numpy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.manipulators.StructuredArrayManipulator.to_numpy" title="Link to this definition">#</a></dt>
+<dd><p>Converts the structured array to a regular 2D NumPy array (matrix).</p>
+<p>This conversion will result in a 2D NumPy array with each column corresponding to a field in the structured array.
+All fields must be of a type that can be cast to a common dtype.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A 2D NumPy array representation of the structured array.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#microframe.core.manipulators.ArrayManipulationError" title="microframe.core.manipulators.ArrayManipulationError"><strong>ArrayManipulationError</strong></a> – If the conversion is not possible due to incompatible data types.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="printers-module">
+<h2>Printers Module<a class="headerlink" href="#printers-module" title="Link to this heading">#</a></h2>
+<p>The <cite>printers</cite> submodule provides utilities to print data structures and results in a user-friendly format.</p>
+<dl class="py class" id="module-microframe.core.printers">
+<dt class="sig sig-object py" id="microframe.core.printers.StructuredDataPrinter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">microframe.core.printers.</span></span><span class="sig-name descname"><span class="pre">StructuredDataPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_value_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.printers.StructuredDataPrinter" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for displaying numpy structured arrays or lists of tuples in a tabular format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>numpy.ndarray</em><em> or </em><em>list</em>) – The data to be printed.</p></li>
+<li><p><strong>columns</strong> (<em>list</em>) – Column names corresponding to the data.</p></li>
+<li><p><strong>max_value_length</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum display length for cell values, defaults to 20.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Variables<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>values</strong> – The data to be printed.</p></li>
+<li><p><strong>columns</strong> – Column names corresponding to the data.</p></li>
+<li><p><strong>max_value_length</strong> – Maximum display length for cell values.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="microframe.core.printers.StructuredDataPrinter.structured_print">
+<span class="sig-name descname"><span class="pre">structured_print</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">80</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_cols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_rows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#microframe.core.printers.StructuredDataPrinter.structured_print" title="Link to this definition">#</a></dt>
+<dd><p>Prints the data in a tabular format with configurable display options.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_width</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum width of the table, defaults to 80.</p></li>
+<li><p><strong>num_cols</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of columns to display, defaults to None.</p></li>
+<li><p><strong>num_rows</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of rows to display, defaults to 10.</p></li>
+<li><p><strong>tail</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display the last rows instead of the first, defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="microframe_readers.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">microframe.readers package</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../api_overview.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">API Documentation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Cameron Olson
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">microframe.core package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#microframe-core-module">Microframe Core Module</a><ul>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame"><code class="docutils literal notranslate"><span class="pre">MicroFrame</span></code></a><ul>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.change_dtypes"><code class="docutils literal notranslate"><span class="pre">MicroFrame.change_dtypes()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.count"><code class="docutils literal notranslate"><span class="pre">MicroFrame.count</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.describe"><code class="docutils literal notranslate"><span class="pre">MicroFrame.describe()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.dtypes"><code class="docutils literal notranslate"><span class="pre">MicroFrame.dtypes</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.from_structured_array"><code class="docutils literal notranslate"><span class="pre">MicroFrame.from_structured_array()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.head"><code class="docutils literal notranslate"><span class="pre">MicroFrame.head()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.iloc"><code class="docutils literal notranslate"><span class="pre">MicroFrame.iloc</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.rename"><code class="docutils literal notranslate"><span class="pre">MicroFrame.rename()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.shape"><code class="docutils literal notranslate"><span class="pre">MicroFrame.shape</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.tail"><code class="docutils literal notranslate"><span class="pre">MicroFrame.tail()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.microframe.MicroFrame.to_numpy"><code class="docutils literal notranslate"><span class="pre">MicroFrame.to_numpy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indexers-module">Indexers Module</a><ul>
+<li><a class="reference internal" href="#microframe.core.indexers.IlocIndexer"><code class="docutils literal notranslate"><span class="pre">IlocIndexer</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.indexers.StructuredArrayIndexer"><code class="docutils literal notranslate"><span class="pre">StructuredArrayIndexer</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#manipulators-module">Manipulators Module</a><ul>
+<li><a class="reference internal" href="#microframe.core.manipulators.ArrayManipulationError"><code class="docutils literal notranslate"><span class="pre">ArrayManipulationError</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.manipulators.StructuredArrayManipulator"><code class="docutils literal notranslate"><span class="pre">StructuredArrayManipulator</span></code></a><ul>
+<li><a class="reference internal" href="#microframe.core.manipulators.StructuredArrayManipulator.change_dtypes"><code class="docutils literal notranslate"><span class="pre">StructuredArrayManipulator.change_dtypes()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.manipulators.StructuredArrayManipulator.rename"><code class="docutils literal notranslate"><span class="pre">StructuredArrayManipulator.rename()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.core.manipulators.StructuredArrayManipulator.to_numpy"><code class="docutils literal notranslate"><span class="pre">StructuredArrayManipulator.to_numpy()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#printers-module">Printers Module</a><ul>
+<li><a class="reference internal" href="#microframe.core.printers.StructuredDataPrinter"><code class="docutils literal notranslate"><span class="pre">StructuredDataPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#microframe.core.printers.StructuredDataPrinter.structured_print"><code class="docutils literal notranslate"><span class="pre">StructuredDataPrinter.structured_print()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>
