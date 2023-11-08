@@ -18,7 +18,7 @@ release = "1.0"
 
 html_title = f"{project} {release} Documentation"
 html_favicon = "_static/Logo.png"
-# html_logo = "_static/Logo.png"
+html_logo = "_static/Logo.png"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -38,6 +38,8 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_static_path = ["_static"]
 
 sys.path.insert(0, os.path.abspath("."))
+
+
 def setup(app):
     from partialmdinclude import setup as partialmdinclude_setup
     partialmdinclude_setup(app)
