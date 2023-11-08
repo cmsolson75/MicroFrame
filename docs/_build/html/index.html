@@ -145,6 +145,9 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/Logo.png" alt="Logo"/>
+  </div>
   
   <span class="sidebar-brand-text">MicroFrame 1.0 Documentation</span>
   
@@ -203,26 +206,26 @@
 </section>
 <section id="microframe">
 <h1>MicroFrame<a class="headerlink" href="#microframe" title="Link to this heading">#</a></h1>
-<p>MicroFrame is a lightweight, efficient data manipulation library in Python, designed for handling structured data with ease. Inspired by the functionality of pandas, MicroFrame offers a simplified approach to data manipulation, making it ideal for small to medium-sized datasets.</p>
+<p>MicroFrame is a lightweight educational data manipulation library designed to provide a pandas-like interface for students learning to work with real-world data. It is optimized for toy datasets and aims to introduce users to data analysis concepts without the overhead of pandas.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>CSV Reading</strong>: Read CSV files efficiently and construct MicroFrame objects with ease.</p></li>
-<li><p><strong>Data Type Inference</strong>: Automatically infer the data types of columns based on the first row of the data.</p></li>
-<li><p><strong>MicroFrame Objects</strong>: Work with data encapsulated in MicroFrame objects that offer flexibility and powerful analytical capabilities.</p></li>
-<li><p><strong>Tabular Printout</strong>: Enjoy clear and organized tabular printouts of your data for easy analysis and presentation.</p></li>
-<li><p><strong>Data Manipulation</strong>: Leverage robust data manipulation tools to transform and analyze your datasets effectively.</p></li>
+<li><p><strong>Efficient CSV Reading</strong>: Quickly and easily read CSV files to create MicroFrame objects, optimized for educational purposes and smaller datasets.</p></li>
+<li><p><strong>Data Type Handling</strong>: Advanced data type inference and explicit type setting offer both convenience and control over the structure of your data.</p></li>
+<li><p><strong>Flexible MicroFrame Objects</strong>: Utilize MicroFrame objects that mimic pandas DataFrame for intuitive data manipulation and analysis.</p></li>
+<li><p><strong>Clear Tabular Display</strong>: Use MicroFrame’s printing capabilities to generate well-formatted tabular representations of your data, making it easier to interpret and present.</p></li>
+<li><p><strong>Robust Data Manipulation</strong>: Perform a variety of data manipulation tasks with methods similar to pandas, such as filtering, transforming, and summarizing data.</p></li>
+<li><p><strong>Advanced Indexing</strong>: Access data efficiently with advanced indexing options, including integer-based, label-based, and boolean indexing using the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> and <code class="docutils literal notranslate"><span class="pre">loc</span></code> methods.</p></li>
+<li><p><strong>Data Conversion Tools</strong>: Seamlessly convert your MicroFrame objects to other formats, including NumPy arrays, with the <code class="docutils literal notranslate"><span class="pre">to_numpy</span></code> method for further numerical computation.</p></li>
+<li><p><strong>User-Friendly API</strong>: Experience a user-friendly API that mirrors pandas to facilitate the transition from educational projects to real-world data analysis.</p></li>
 </ul>
 </section>
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>To install MicroFrame from the GitHub repository, follow these steps:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/cmsolson75/MicroFrame.git
-<span class="nb">cd</span><span class="w"> </span>MicroFrame
-pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<p>Install MicroFrame using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>microframe
 </pre></div>
 </div>
-<p>Ensure you have Python 3.x installed on your system to use MicroFrame.</p>
 </section>
 <section id="api-reference">
 <h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
@@ -240,10 +243,8 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#id1">Documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#contributing">Contributing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="examples.html#license">License</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#basic-usage">Basic Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference external" href="https://github.com/cmsolson75/MicroFrame">GitHub Repo</a></li>

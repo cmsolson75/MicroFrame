@@ -3,11 +3,17 @@ Examples
 
 Here's how to get started with Microframe:
 
+
+Quick Start
+-----------
+
 .. mdinclude:: ../README.md
-   :start-line: 24
-   :end-line: 100
+   :start-line: 27
+   :end-line: 43
 
-.. code-block:: python
+Basic Usage
+-----------
 
-    import microframe
-    # example usage
+.. mdinclude:: ../README.md
+   :start-line: 47
+   :end-line: 165
