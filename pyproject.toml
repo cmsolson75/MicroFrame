@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "microframe"
+version = "0.1.0"
+authors = [
+  { name="Cameron Olson", email="cmsolson75@gmail.com" },
+]
+
+description = "Lightweight data structure for data handling and analysis in Python"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.26.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.2",
+    "pytest-cov>=4.1.0",
+    "pytest-lazy-fixture>=0.6.3",
+    "black>=23.10.1",
+    "hypothesis>=6.88.3",
+    "sphinx>=7.2.6",
+    "furo>=2023.9.10",
+    "hatch>=1.7.0",
+    "m2r2>=0.3.3.post2"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/cmsolson75/MicroFrame"
+"Bug Tracker" = "https://github.com/cmsolson75/MicroFrame/issues"
+"Documentation" = "https://cmsolson75.github.io/MicroFrame/"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.github",
+  "/docs",
+  "/tests",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["microframe"]
