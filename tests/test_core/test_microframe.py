@@ -1,4 +1,5 @@
 import pytest
+from hypothesis import given, strategies as st, assume
 import numpy as np
 from microframe.core.microframe import MicroFrame
 from microframe.core.indexers import IlocIndexer
@@ -37,6 +38,28 @@ def test_microframe_initialization(default_microframe):
 
     # Test shape property
     assert microframe.shape == (3, 2)
+
+# Hypothesis test: Uncomment to run
+# @given(
+#     data=st.lists(st.lists(st.one_of(st.integers(), st.text(min_size=1))), min_size=1, max_size=5),
+#     dtypes=st.lists(st.sampled_from(["float32", "U100"]), min_size=1, max_size=2),
+#     columns=st.lists(st.text(min_size=1, alphabet=st.characters(whitelist_categories=('Lu', 'Ll'))), min_size=1,
+#                      max_size=2)
+# )
+# def test_microframe_initialization_with_hypothesis(data, dtypes, columns):
+#     # Adjust assumptions to ensure all lists have the same length and each sublist in data has a length that matches
+#     # columns
+#     assume(len(data) > 0)
+#     assume(all(len(row) == len(columns) for row in data))
+#     assume(len(dtypes) == len(columns))
+#
+#
+#     try:
+#         microframe = MicroFrame(data, dtypes, columns)
+#         assert isinstance(microframe, MicroFrame)
+#         assert all(column in microframe.columns for column in columns)
+#     except ValueError:
+#         pass
 
 
 def test_microframe_initialization_with_structured_array():

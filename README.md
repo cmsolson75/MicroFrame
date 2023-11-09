@@ -9,8 +9,8 @@ MicroFrame is a lightweight educational data manipulation library designed to pr
 - **Data Type Handling**: Advanced data type inference and explicit type setting offer both convenience and control over the structure of your data.
 - **Flexible MicroFrame Objects**: Utilize MicroFrame objects that mimic pandas DataFrame for intuitive data manipulation and analysis.
 - **Clear Tabular Display**: Use MicroFrame’s printing capabilities to generate well-formatted tabular representations of your data, making it easier to interpret and present.
-- **Robust Data Manipulation**: Perform a variety of data manipulation tasks with methods similar to pandas, such as filtering, transforming, and summarizing data.
-- **Advanced Indexing**: Access data efficiently with advanced indexing options, including integer-based, label-based, and boolean indexing using the `iloc` and `loc` methods.
+- **Robust Data Manipulation**: Perform a variety of data manipulation tasks with methods similar to pandas, such as filtering, column dtype modification and summarizing data.
+- **Advanced Indexing**: Access data efficiently with advanced indexing options, using the `iloc` method similar to pandas iloc method.
 - **Data Conversion Tools**: Seamlessly convert your MicroFrame objects to other formats, including NumPy arrays, with the `to_numpy` method for further numerical computation.
 - **User-Friendly API**: Experience a user-friendly API that mirrors pandas to facilitate the transition from educational projects to real-world data analysis.
 
@@ -81,7 +81,17 @@ mframe.rename({"num": "number", "char": "character"})
 mframe.change_dtypes({"number": "float64", "character": "U10"})
 ```
 
-#### Accessing Data
+#### Accessing Column Data with Boolean Indexing
+
+```python
+data = [[1, "a"], [2, "b"], [3, "c"]]
+columns = ["num", "char"]
+dtypes = ["int32", "U1"]
+
+mframe = mf.MicroFrame(data, columns, dtypes)
+first_col = mframe["num"] # Access just num column
+```
+#### Accessing Row Data with `iloc`
 
 ```python
 first_row = mframe.iloc[0]
@@ -121,11 +131,6 @@ mframe.iloc[2, 1] = "Test"
 subset = mframe.iloc[:2, :2]
 ```
 
-#### Boolean Indexing
-
-```python
-filtered_rows = mframe.iloc[mframe.iloc[:, 0] > some_value]
-```
 
 ### Displaying Data
 
@@ -162,6 +167,7 @@ For scenarios where you need to perform NumPy operations on a subset of your dat
 # Select the first two rows using iloc and convert them to a NumPy array
 numpy_subset = mframe.iloc[:, 1:5].to_numpy()
 ```
+
 ## Documentation
 
 For full documentation, visit our [MicroFrame Documentation](https://cmsolson75.github.io/MicroFrame/). Here, you will find detailed information on all the functionalities that MicroFrame offers.

@@ -36,16 +36,35 @@ class MicroFrame:
     values : np.ndarray
         A structured numpy array representing the data.
 
+
+
+    Examples
+    --------
+
+    >>> # Simple Initialization
+    >>> data = [[1, 'Alice'], [2, 'Bob']] # Initialize Data
+    >>> dtypes = ['int32', 'U10'] # Initialize Data Types
+    >>> columns = ['id', 'name'] # Initialize Column Names
+    >>> mframe = MicroFrame(data, dtypes, columns)
+    >>> mframe.head() # Display first 5 rows
+    id  name
+    ---------
+    1   Alice
+    2   Bob
+    2 rows x 2 columns
+
+    >>> # How to extract a subsection of the data and convert it to
+    >>> # numpy for training
+    >>> mframe_slice = mframe.iloc[:, 0] # returns all rows, but just col 0
+    >>> numpy_array = mframe_slice.to_numpy() # returns mframe_slice as a numpy array
+    >>> numpy_array
+    array([[1],
+           [2]], dtype=int32)
+
+
+
     Methods
     -------
-    head(max_width=80, num_cols=None, num_rows=5)
-        Prints the first `num_rows` rows of the MicroFrame.
-    tail(max_width=80, num_cols=None, num_rows=5)
-        Prints the last `num_rows` rows of the MicroFrame.
-    rename(new_columns)
-        Renames the columns of the MicroFrame.
-    change_dtypes(dtypes_dict)
-        Changes the data types of specified columns.
     """
 
     def __init__(self, data: List[List[Any]], dtypes: List[str], columns: Optional[List[str]] = None):
@@ -220,6 +239,12 @@ class MicroFrame:
         :param max_width: Maximum width of the printed table in characters.
         :param num_cols: Number of columns to display. If None, all columns are displayed.
         :param num_rows: Number of rows to display.
+
+        Example::
+
+        >>> mframe.head()  # Show first 5 rows
+        >>> mframe.head(num_rows=10)  # Show first 10 rows
+
         """
         printer = StructuredDataPrinter(self.values, self.columns)
         printer.structured_print(max_width, num_cols, num_rows)
@@ -234,6 +259,12 @@ class MicroFrame:
         :param max_width: Maximum width of the printed table in characters.
         :param num_cols: Number of columns to display. If None, all columns are displayed.
         :param num_rows: Number of rows to display.
+
+        Example::
+
+            >>> mframe.tail()
+            >>> mframe.tail(num_rows=10)
+
         """
         printer = StructuredDataPrinter(self.values, self.columns)
         printer.structured_print(max_width, num_cols, num_rows, tail=True)
@@ -246,6 +277,10 @@ class MicroFrame:
         the MicroFrame based on the provided mapping.
 
         :param new_columns: A dictionary mapping old column names to new column names.
+
+        Example::
+
+            >>> mframe.rename({'old_name1': 'new_name1', 'old_name2': 'new_name2'})
         """
         manipulator = StructuredArrayManipulator(self.values, self.columns)
         manipulator.rename(new_columns)
@@ -260,6 +295,11 @@ class MicroFrame:
         of the columns of the MicroFrame based on the provided mapping.
 
         :param dtypes_dict: A dictionary mapping column names to their new data types.
+
+        Example::
+
+            >>> mframe.change_dtypes({'column1': 'float64', 'column2': 'int32'})
+
         """
         manipulator = StructuredArrayManipulator(self.values, self.columns)
         manipulator.change_dtypes(dtypes_dict)
@@ -274,6 +314,11 @@ class MicroFrame:
 
         :return: A 2D NumPy array representation of the MicroFrame data.
         :rtype: numpy.ndarray
+
+        Example::
+
+            >>> numpy_array = mframe.to_numpy()
+
         """
         manipulator = StructuredArrayManipulator(self.values, self.columns)
         return manipulator.to_numpy()
@@ -302,6 +347,11 @@ class MicroFrame:
 
         :raises TypeError: If columns contain types that cannot be converted to float.
         :raises ValueError: If computations encounter issues like an empty column.
+
+        Example::
+
+            >>> mframe.describe()
+
         """
         # Identify numeric columns and their data types
         numeric_columns = [name for (name, dtype) in self.values.dtype.fields.items() if
@@ -348,6 +398,11 @@ class MicroFrame:
 
         :return: The data types of the columns.
         :rtype: numpy.dtype
+
+        Example::
+
+            >>> mframe.dtypes
+
         """
         return self.values.dtype
 
@@ -361,6 +416,11 @@ class MicroFrame:
 
         :return: The number of rows in the MicroFrame.
         :rtype: int
+
+        Example::
+
+            >>> mframe.count
+
         """
         return self.values.shape[0]
 
@@ -376,6 +436,11 @@ class MicroFrame:
 
         :return: The shape of the MicroFrame.
         :rtype: tuple
+
+        Example::
+
+            >>> mframe.shape
+
         """
         return self.values.shape[0], self.columns.shape[0]
 
@@ -393,5 +458,10 @@ class MicroFrame:
 
         :return: An instance of IlocIndexer for integer-location based indexing.
         :rtype: IlocIndexer
+
+        Example::
+
+            >>> first_row = mframe.iloc[0]  # First row of the MicroFrame
+            >>> last_row = mframe.iloc[-1] # Last row of the MicroFrame
         """
         return IlocIndexer(self.values, self.columns, MicroFrame)

@@ -67,11 +67,32 @@ T = TypeVar('T')
 
 
 class IlocIndexer(Generic[T], StructuredArrayIndexer):
-    def __init__(self, values, columns, return_type: Type[T]):
+    """
+    Provides integer-location based indexing for selection by position.
+
+    This indexer is a generic class that returns a subset of the data in a
+    structured array format. It inherits from `StructuredArrayIndexer` and allows
+    for selection of data by integer-location, similar to `.iloc` in pandas.
+
+    Parameters
+    ----------
+    values : numpy.ndarray
+        The numpy structured array to be indexed.
+    columns : numpy.ndarray
+        Column names corresponding to the data in the structured array.
+    return_type : Type[T]
+        The type of the object that will be returned by the indexer. Typically, this will
+        be a `MicroFrame` or similar class that can be initialized from a structured array.
+    """
+
+    def __init__(self, values: np.ndarray, columns: np.ndarray, return_type: Type[T]):
+        """
+        Initializes the indexer with structured array values, column names, and the return type.
+        """
         super().__init__(values, columns)  # Initialize the base class
         self.return_type = return_type
 
-    def __getitem__(self, idx):
+    def __getitem__(self, idx: Union[int, tuple]) -> Type[T]:
         """
         Retrieve a subset of the data as the specified return type.
 

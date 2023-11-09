@@ -18,8 +18,8 @@ def read_csv(file_path: str) -> MicroFrame:
     :raises TypeError: If the contents of the CSV file are not in the expected format.
     :raises ValueError: If the CSV file is empty or the data types cannot be inferred.
 
-    Example::
-        >>> from microframe.readers import read_csv
+    Example:
+        >>> from microframe.readers.readers import read_csv
         >>> microframe = read_csv('path/to/your.csv')
         >>> print(microframe)
     """

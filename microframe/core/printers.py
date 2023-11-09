@@ -12,6 +12,15 @@ class StructuredDataPrinter:
     :ivar values: The data to be printed.
     :ivar columns: Column names corresponding to the data.
     :ivar max_value_length: Maximum display length for cell values.
+
+    Example:
+        >>> import numpy as np
+        >>> # Initialize a numpy structured array for data
+        >>> data = np.array([(0, 10. , 'Item 1'), (1, 20.5, 'Item 2'), (2, 30.2, 'Item 3'), (3, 40.8, 'Item 4'),
+        >>>                 (4, 50.1, 'Item 5')], dtype=[('id', '<i4'), ('value', '<f4'), ('description', '<U25')])
+        >>> # Initialize normal numpy array for columns
+        >>> columns = np.array(['id', 'value', 'description'])
+        >>> printer = StructuredDataPrinter(data, columns)
     """
 
     def __init__(self, values, columns, max_value_length=20):
@@ -177,7 +186,16 @@ class StructuredDataPrinter:
         :type num_rows: int, optional
         :param tail: Whether to display the last rows instead of the first, defaults to False.
         :type tail: bool, optional
+
+        Example:
+
+            >>> printer.structured_print() # Print the data in the default tabular format.
+            >>> printer.structured_print(max_width=50) # Print the data with a constrained width
+            >>> printer.structured_print(num_cols=3) # Print 3 columns of data.
+            >>> printer.structured_print(num_rows=15) # Print the first 15 rows of data
+            >>> printer.structured_print(num_rows=5, tail=True) # If you want to see the end of a large dataset, use the `tail` parameter to print the last rows.
         """
+
         self._compute_widths(num_rows, tail)
         total_width = sum(self.max_widths) + len(self.columns) - 1
         if num_cols is not None or total_width > max_width:
