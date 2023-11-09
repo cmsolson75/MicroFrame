@@ -13,10 +13,6 @@ This module provides the interfaces and base functionality for reading data.
    :undoc-members:
    :show-inheritance:
 
-Utilities
----------
-
-The utilities submodules assist the main readers with format-specific tasks.
 
 CSV Utilities
 -------------

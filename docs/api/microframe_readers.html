@@ -1,15 +1,15 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="./">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="frame package" href="frame.html" /><link rel="prev" title="file_readers package" href="file_readers.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Examples" href="../examples.html" /><link rel="prev" title="microframe.core package" href="microframe_core.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>file_readers.utils package - MicroFrame 1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="shortcut icon" href="../_static/Logo.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>microframe.readers package - MicroFrame 1.0 Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=10e673fd" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
 
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">MicroFrame 1.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">MicroFrame 1.0 Documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -143,24 +143,30 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../_static/Logo.png" alt="Logo"/>
+  </div>
   
-  <span class="sidebar-brand-text">MicroFrame 1.0 documentation</span>
+  <span class="sidebar-brand-text">MicroFrame 1.0 Documentation</span>
   
-</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current has-children"><a class="reference internal" href="file_readers.html">file_readers package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of file_readers package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">file_readers.utils package</a></li>
+  <ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../api_overview.html">API Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="microframe_core.html">microframe.core package</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">microframe.readers package</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="frame.html">frame package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/cmsolson75/MicroFrame">GitHub Repo</a></li>
 </ul>
 
 </div>
@@ -195,16 +201,54 @@
           </label>
         </div>
         <article role="main">
-          <section id="file-readers-utils-package">
-<h1>file_readers.utils package<a class="headerlink" href="#file-readers-utils-package" title="Link to this heading">#</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+          <section id="microframe-readers-package">
+<h1>microframe.readers package<a class="headerlink" href="#microframe-readers-package" title="Link to this heading">#</a></h1>
+<p>The <cite>microframe.readers</cite> subpackage includes modules for reading data into Microframe data structures.</p>
+<section id="readers-module">
+<h2>readers module<a class="headerlink" href="#readers-module" title="Link to this heading">#</a></h2>
+<p>This module provides the interfaces and base functionality for reading data.</p>
+<dl class="py function" id="module-microframe.readers.readers">
+<dt class="sig sig-object py" id="microframe.readers.readers.read_csv">
+<span class="sig-prename descclassname"><span class="pre">microframe.readers.readers.</span></span><span class="sig-name descname"><span class="pre">read_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="microframe_core.html#microframe.core.microframe.MicroFrame" title="microframe.core.microframe.MicroFrame"><span class="pre">MicroFrame</span></a></span></span><a class="headerlink" href="#microframe.readers.readers.read_csv" title="Link to this definition">#</a></dt>
+<dd><p>Reads a CSV file and constructs a <cite>MicroFrame</cite> object from it.</p>
+<p>The function reads the CSV file specified by <cite>file_path</cite>, infers the data types of its columns, and returns a
+<cite>MicroFrame</cite> object containing the data and inferred data types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file_path</strong> (<em>str</em>) – The path to the CSV file to be read.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A <cite>MicroFrame</cite> object containing the data from the CSV file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="microframe_core.html#microframe.core.microframe.MicroFrame" title="microframe.core.microframe.MicroFrame">MicroFrame</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If the specified file does not exist.</p></li>
+<li><p><strong>csv.Error</strong> – If an error occurs during CSV reading.</p></li>
+<li><p><strong>TypeError</strong> – If the contents of the CSV file are not in the expected format.</p></li>
+<li><p><strong>ValueError</strong> – If the CSV file is empty or the data types cannot be inferred.</p></li>
+</ul>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">microframe.readers.readers</span> <span class="kn">import</span> <span class="n">read_csv</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">microframe</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;path/to/your.csv&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">microframe</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
-<section id="module-file_readers.utils.csv_utils">
-<span id="file-readers-utils-csv-utils-module"></span><h2>file_readers.utils.csv_utils module<a class="headerlink" href="#module-file_readers.utils.csv_utils" title="Link to this heading">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="file_readers.utils.csv_utils.infer_column_dtypes">
-<span class="sig-prename descclassname"><span class="pre">file_readers.utils.csv_utils.</span></span><span class="sig-name descname"><span class="pre">infer_column_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#file_readers.utils.csv_utils.infer_column_dtypes" title="Link to this definition">#</a></dt>
+<section id="csv-utilities">
+<h2>CSV Utilities<a class="headerlink" href="#csv-utilities" title="Link to this heading">#</a></h2>
+<p>This module provides CSV-related utility functions.</p>
+<dl class="py function" id="module-microframe.readers.utils.csv_utils">
+<dt class="sig sig-object py" id="microframe.readers.utils.csv_utils.infer_column_dtypes">
+<span class="sig-prename descclassname"><span class="pre">microframe.readers.utils.csv_utils.</span></span><span class="sig-name descname"><span class="pre">infer_column_dtypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#microframe.readers.utils.csv_utils.infer_column_dtypes" title="Link to this definition">#</a></dt>
 <dd><p>Infers the data types of columns based on the first row of the data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -226,8 +270,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="file_readers.utils.csv_utils.is_float">
-<span class="sig-prename descclassname"><span class="pre">file_readers.utils.csv_utils.</span></span><span class="sig-name descname"><span class="pre">is_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#file_readers.utils.csv_utils.is_float" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="microframe.readers.utils.csv_utils.is_float">
+<span class="sig-prename descclassname"><span class="pre">microframe.readers.utils.csv_utils.</span></span><span class="sig-name descname"><span class="pre">is_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#microframe.readers.utils.csv_utils.is_float" title="Link to this definition">#</a></dt>
 <dd><p>Checks if a given string can be converted to a float.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -243,8 +287,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="file_readers.utils.csv_utils.open_csv">
-<span class="sig-prename descclassname"><span class="pre">file_readers.utils.csv_utils.</span></span><span class="sig-name descname"><span class="pre">open_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#file_readers.utils.csv_utils.open_csv" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="microframe.readers.utils.csv_utils.open_csv">
+<span class="sig-prename descclassname"><span class="pre">microframe.readers.utils.csv_utils.</span></span><span class="sig-name descname"><span class="pre">open_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="headerlink" href="#microframe.readers.utils.csv_utils.open_csv" title="Link to this definition">#</a></dt>
 <dd><p>Reads a CSV file and returns its contents as a list of lists.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -274,23 +318,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="frame.html">
+          <a class="next-page" href="../examples.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">frame package</div>
+                <div class="title">Examples</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="file_readers.html">
+          <a class="prev-page" href="microframe_core.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">file_readers package</div>
+                <div class="title">microframe.core package</div>
                 
               </div>
             </a>
@@ -324,12 +368,15 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">file_readers.utils package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-file_readers.utils.csv_utils">file_readers.utils.csv_utils module</a><ul>
-<li><a class="reference internal" href="#file_readers.utils.csv_utils.infer_column_dtypes"><code class="docutils literal notranslate"><span class="pre">infer_column_dtypes()</span></code></a></li>
-<li><a class="reference internal" href="#file_readers.utils.csv_utils.is_float"><code class="docutils literal notranslate"><span class="pre">is_float()</span></code></a></li>
-<li><a class="reference internal" href="#file_readers.utils.csv_utils.open_csv"><code class="docutils literal notranslate"><span class="pre">open_csv()</span></code></a></li>
+<li><a class="reference internal" href="#">microframe.readers package</a><ul>
+<li><a class="reference internal" href="#readers-module">readers module</a><ul>
+<li><a class="reference internal" href="#microframe.readers.readers.read_csv"><code class="docutils literal notranslate"><span class="pre">read_csv()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#csv-utilities">CSV Utilities</a><ul>
+<li><a class="reference internal" href="#microframe.readers.utils.csv_utils.infer_column_dtypes"><code class="docutils literal notranslate"><span class="pre">infer_column_dtypes()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.readers.utils.csv_utils.is_float"><code class="docutils literal notranslate"><span class="pre">is_float()</span></code></a></li>
+<li><a class="reference internal" href="#microframe.readers.utils.csv_utils.open_csv"><code class="docutils literal notranslate"><span class="pre">open_csv()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -343,9 +390,9 @@
       
     </aside>
   </div>
-</div><script src="_static/documentation_options.js?v=f2a433a1"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+</div><script src="../_static/documentation_options.js?v=f2a433a1"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     </body>
 </html>

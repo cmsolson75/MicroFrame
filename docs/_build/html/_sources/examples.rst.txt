@@ -16,4 +16,4 @@ Basic Usage
 
 .. mdinclude:: ../README.md
    :start-line: 47
-   :end-line: 165
+   :end-line: 170

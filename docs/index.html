@@ -3,11 +3,11 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="file_readers package" href="file_readers.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API Documentation" href="api_overview.html" />
 
-    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>MicroFrame 1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="shortcut icon" href="_static/Logo.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
+        <title>MicroFrame 1.0 Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=10e673fd" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
     
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="#"><div class="brand">MicroFrame 1.0 documentation</div></a>
+      <a href="#"><div class="brand">MicroFrame 1.0 Documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,8 +145,11 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="#">
   
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/Logo.png" alt="Logo"/>
+  </div>
   
-  <span class="sidebar-brand-text">MicroFrame 1.0 documentation</span>
+  <span class="sidebar-brand-text">MicroFrame 1.0 Documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -154,13 +157,16 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="file_readers.html">file_readers package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of file_readers package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_readers.utils.html">file_readers.utils package</a></li>
+  <ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api_overview.html">API Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of API Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/microframe_core.html">microframe.core package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/microframe_readers.html">microframe.readers package</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="frame.html">frame package</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/cmsolson75/MicroFrame">GitHub Repo</a></li>
 </ul>
 
 </div>
@@ -196,26 +202,55 @@
         </div>
         <article role="main">
           <section id="welcome-to-microframe-s-documentation">
-<h1>Welcome to MicroFrame’s documentation!<a class="headerlink" href="#welcome-to-microframe-s-documentation" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="file_readers.html">file_readers package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="file_readers.html#subpackages">Subpackages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="file_readers.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="file_readers.html#module-file_readers.readers">file_readers.readers module</a></li>
+<h1>Welcome to MicroFrame’s Documentation!<a class="headerlink" href="#welcome-to-microframe-s-documentation" title="Link to this heading">#</a></h1>
+</section>
+<section id="microframe">
+<h1>MicroFrame<a class="headerlink" href="#microframe" title="Link to this heading">#</a></h1>
+<p>MicroFrame is a lightweight educational data manipulation library designed to provide a pandas-like interface for students learning to work with real-world data. It is optimized for toy datasets and aims to introduce users to data analysis concepts without the overhead of pandas.</p>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Efficient CSV Reading</strong>: Quickly and easily read CSV files to create MicroFrame objects, optimized for educational purposes and smaller datasets.</p></li>
+<li><p><strong>Data Type Handling</strong>: Advanced data type inference and explicit type setting offer both convenience and control over the structure of your data.</p></li>
+<li><p><strong>Flexible MicroFrame Objects</strong>: Utilize MicroFrame objects that mimic pandas DataFrame for intuitive data manipulation and analysis.</p></li>
+<li><p><strong>Clear Tabular Display</strong>: Use MicroFrame’s printing capabilities to generate well-formatted tabular representations of your data, making it easier to interpret and present.</p></li>
+<li><p><strong>Robust Data Manipulation</strong>: Perform a variety of data manipulation tasks with methods similar to pandas, such as filtering, column dtype modification and summarizing data.</p></li>
+<li><p><strong>Advanced Indexing</strong>: Access data efficiently with advanced indexing options, using the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> method similar to pandas iloc method.</p></li>
+<li><p><strong>Data Conversion Tools</strong>: Seamlessly convert your MicroFrame objects to other formats, including NumPy arrays, with the <code class="docutils literal notranslate"><span class="pre">to_numpy</span></code> method for further numerical computation.</p></li>
+<li><p><strong>User-Friendly API</strong>: Experience a user-friendly API that mirrors pandas to facilitate the transition from educational projects to real-world data analysis.</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="frame.html">frame package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="frame.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="frame.html#module-frame.indexers">frame.indexers module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="frame.html#module-frame.manipulators">frame.manipulators module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="frame.html#module-frame.microframe">frame.microframe module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="frame.html#module-frame.printers">frame.printers module</a></li>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Install MicroFrame using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>microframe
+</pre></div>
+</div>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_overview.html">API Documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_overview.html#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
 </div>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#quick-start">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples.html#basic-usage">Basic Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/cmsolson75/MicroFrame">GitHub Repo</a></li>
+</ul>
+</div>
+</section>
 </section>
 <section id="indices-and-tables">
 <h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h1>
@@ -231,12 +266,12 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="file_readers.html">
+          <a class="next-page" href="api_overview.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">file_readers package</div>
+                <div class="title">API Documentation</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
