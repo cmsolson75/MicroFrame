@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="microframe.readers package" href="api/microframe_readers.html" />
 
     <link rel="shortcut icon" href="_static/Logo.png"/><!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Examples - MicroFrame 1.0 Documentation</title>
+        <title>Examples - MicroFrame 0.1.0 Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=10e673fd" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">MicroFrame 1.0 Documentation</div></a>
+      <a href="index.html"><div class="brand">MicroFrame 0.1.0 Documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -149,7 +149,7 @@
     <img class="sidebar-logo" src="_static/Logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">MicroFrame 1.0 Documentation</span>
+  <span class="sidebar-brand-text">MicroFrame 0.1.0 Documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -214,18 +214,24 @@
 
 <span class="c1"># Alternatively, create a MicroFrame object manually</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]]</span>
-<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">]</span>
 <span class="n">dtypes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;int32&quot;</span><span class="p">,</span> <span class="s2">&quot;U1&quot;</span><span class="p">]</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">]</span>
 
-<span class="n">mframe</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">MicroFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">)</span>
+<span class="n">mframe</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">MicroFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
+<span class="n">mframe</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> <span class="c1"># Display first 5 rows</span>
+<span class="c1"># Extract data as numpy array</span>
+<span class="n">mframe_slice</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="c1"># returns all rows, but just col 0</span>
+<span class="n">numpy_array</span> <span class="o">=</span> <span class="n">mframe_slice</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span> <span class="c1"># returns mframe_slice as a numpy array</span>
 </pre></div>
 </div>
 </section>
 <section id="basic-usage">
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Basic Usage<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>MicroFrame simplifies the process of data analysis. Here are some basic operations:</p>
 <section id="reading-from-a-csv">
-<h3>Reading from a CSV<a class="headerlink" href="#reading-from-a-csv" title="Link to this heading">#</a></h3>
+<h4>Reading from a CSV<a class="headerlink" href="#reading-from-a-csv" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">microframe</span> <span class="k">as</span> <span class="nn">mf</span>
 
 <span class="n">mframe</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;path_to_your_csv_file.csv&quot;</span><span class="p">)</span>
@@ -233,99 +239,102 @@
 </div>
 </section>
 <section id="creating-a-microframe-object">
-<h3>Creating a MicroFrame Object<a class="headerlink" href="#creating-a-microframe-object" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]]</span>
-<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">]</span>
+<h4>Creating a MicroFrame Object<a class="headerlink" href="#creating-a-microframe-object" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">microframe</span> <span class="k">as</span> <span class="nn">mf</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]]</span>
 <span class="n">dtypes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;int32&quot;</span><span class="p">,</span> <span class="s2">&quot;U1&quot;</span><span class="p">]</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">]</span>
 
-<span class="n">mframe</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">MicroFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">)</span>
+<span class="n">mframe</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">MicroFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+</section>
 <section id="data-manipulation">
-<h4>Data Manipulation<a class="headerlink" href="#data-manipulation" title="Link to this heading">#</a></h4>
+<h3>Data Manipulation<a class="headerlink" href="#data-manipulation" title="Link to this heading">#</a></h3>
 <p>MicroFrame provides several methods to manipulate your data:</p>
-</section>
-</section>
 <section id="renaming-columns">
-<h3>Renaming Columns<a class="headerlink" href="#renaming-columns" title="Link to this heading">#</a></h3>
+<h4>Renaming Columns<a class="headerlink" href="#renaming-columns" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mframe</span><span class="o">.</span><span class="n">rename</span><span class="p">({</span><span class="s2">&quot;num&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">:</span> <span class="s2">&quot;character&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </section>
 <section id="changing-data-types">
-<h3>Changing Data Types<a class="headerlink" href="#changing-data-types" title="Link to this heading">#</a></h3>
+<h4>Changing Data Types<a class="headerlink" href="#changing-data-types" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mframe</span><span class="o">.</span><span class="n">change_dtypes</span><span class="p">({</span><span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="s2">&quot;float64&quot;</span><span class="p">,</span> <span class="s2">&quot;character&quot;</span><span class="p">:</span> <span class="s2">&quot;U10&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </section>
 <section id="accessing-column-data-with-boolean-indexing">
-<h3>Accessing Column Data with Boolean Indexing<a class="headerlink" href="#accessing-column-data-with-boolean-indexing" title="Link to this heading">#</a></h3>
+<h4>Accessing Column Data with Boolean Indexing<a class="headerlink" href="#accessing-column-data-with-boolean-indexing" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">]]</span>
-<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">]</span>
 <span class="n">dtypes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;int32&quot;</span><span class="p">,</span> <span class="s2">&quot;U1&quot;</span><span class="p">]</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">,</span> <span class="s2">&quot;char&quot;</span><span class="p">]</span>
 
-<span class="n">mframe</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">MicroFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">)</span>
+<span class="n">mframe</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">MicroFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">dtypes</span><span class="p">,</span> <span class="n">columns</span><span class="p">)</span>
 <span class="n">first_col</span> <span class="o">=</span> <span class="n">mframe</span><span class="p">[</span><span class="s2">&quot;num&quot;</span><span class="p">]</span> <span class="c1"># Access just num column</span>
 </pre></div>
 </div>
 </section>
 <section id="accessing-row-data-with-iloc">
-<h3>Accessing Row Data with <code class="docutils literal notranslate"><span class="pre">iloc</span></code><a class="headerlink" href="#accessing-row-data-with-iloc" title="Link to this heading">#</a></h3>
+<h4>Accessing Row Data with <code class="docutils literal notranslate"><span class="pre">iloc</span></code><a class="headerlink" href="#accessing-row-data-with-iloc" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first_row</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
+</section>
+</section>
 <section id="advanced-indexing-with-iloc">
-<h4>Advanced Indexing with <code class="docutils literal notranslate"><span class="pre">iloc</span></code><a class="headerlink" href="#advanced-indexing-with-iloc" title="Link to this heading">#</a></h4>
+<h3>Advanced Indexing with <code class="docutils literal notranslate"><span class="pre">iloc</span></code><a class="headerlink" href="#advanced-indexing-with-iloc" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">iloc</span></code> indexer allows for integer-location based indexing:</p>
-</section>
-</section>
 <section id="accessing-a-single-row">
-<h3>Accessing a Single Row<a class="headerlink" href="#accessing-a-single-row" title="Link to this heading">#</a></h3>
+<h4>Accessing a Single Row<a class="headerlink" href="#accessing-a-single-row" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first_row</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
 <section id="accessing-multiple-rows">
-<h3>Accessing Multiple Rows<a class="headerlink" href="#accessing-multiple-rows" title="Link to this heading">#</a></h3>
+<h4>Accessing Multiple Rows<a class="headerlink" href="#accessing-multiple-rows" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">first_two_rows</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
 <section id="accessing-a-single-cell">
-<h3>Accessing a Single Cell<a class="headerlink" href="#accessing-a-single-cell" title="Link to this heading">#</a></h3>
+<h4>Accessing a Single Cell<a class="headerlink" href="#accessing-a-single-cell" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cell_value</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
 <section id="setting-a-value-in-a-cell">
-<h3>Setting a Value in a Cell<a class="headerlink" href="#setting-a-value-in-a-cell" title="Link to this heading">#</a></h3>
+<h4>Setting a Value in a Cell<a class="headerlink" href="#setting-a-value-in-a-cell" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Test&quot;</span>
 </pre></div>
 </div>
 </section>
 <section id="slicing-rows-and-columns">
-<h3>Slicing Rows and Columns<a class="headerlink" href="#slicing-rows-and-columns" title="Link to this heading">#</a></h3>
+<h4>Slicing Rows and Columns<a class="headerlink" href="#slicing-rows-and-columns" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">subset</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
+</section>
+</section>
 <section id="displaying-data">
-<h4>Displaying Data<a class="headerlink" href="#displaying-data" title="Link to this heading">#</a></h4>
+<h3>Displaying Data<a class="headerlink" href="#displaying-data" title="Link to this heading">#</a></h3>
 <p>Similar to pandas, you can display parts of your dataset:</p>
-</section>
-</section>
 <section id="print-the-first-few-rows">
-<h3>Print the First Few Rows<a class="headerlink" href="#print-the-first-few-rows" title="Link to this heading">#</a></h3>
+<h4>Print the First Few Rows<a class="headerlink" href="#print-the-first-few-rows" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mframe</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
 <section id="print-the-last-few-rows">
-<h3>Print the Last Few Rows<a class="headerlink" href="#print-the-last-few-rows" title="Link to this heading">#</a></h3>
+<h4>Print the Last Few Rows<a class="headerlink" href="#print-the-last-few-rows" title="Link to this heading">#</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mframe</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
+</section>
+</section>
 <section id="converting-to-numpy-array">
-<h4>Converting to NumPy Array<a class="headerlink" href="#converting-to-numpy-array" title="Link to this heading">#</a></h4>
+<h3>Converting to NumPy Array<a class="headerlink" href="#converting-to-numpy-array" title="Link to this heading">#</a></h3>
 <p>For times when you need to work with a NumPy array, MicroFrame provides the <code class="docutils literal notranslate"><span class="pre">to_numpy</span></code> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the MicroFrame to a 2D NumPy array</span>
 <span class="n">numpy_array</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
@@ -334,13 +343,12 @@
 <p>This method will convert the structured data within the MicroFrame to a regular 2D NumPy array.</p>
 </section>
 <section id="chaining-iloc-with-to-numpy">
-<h4>Chaining <code class="docutils literal notranslate"><span class="pre">iloc</span></code> with <code class="docutils literal notranslate"><span class="pre">to_numpy</span></code><a class="headerlink" href="#chaining-iloc-with-to-numpy" title="Link to this heading">#</a></h4>
+<h3>Chaining <code class="docutils literal notranslate"><span class="pre">iloc</span></code> with <code class="docutils literal notranslate"><span class="pre">to_numpy</span></code><a class="headerlink" href="#chaining-iloc-with-to-numpy" title="Link to this heading">#</a></h3>
 <p>For scenarios where you need to perform NumPy operations on a subset of your data, you can chain the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> indexer with the <code class="docutils literal notranslate"><span class="pre">to_numpy</span></code> method:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select the first two rows using iloc and convert them to a NumPy array</span>
 <span class="n">numpy_subset</span> <span class="o">=</span> <span class="n">mframe</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 </pre></div>
 </div>
-</section>
 </section>
 </section>
 </section>
@@ -395,32 +403,33 @@
 <li><a class="reference internal" href="#">Examples</a><ul>
 <li><a class="reference internal" href="#quick-start">Quick Start</a></li>
 <li><a class="reference internal" href="#basic-usage">Basic Usage</a><ul>
+<li><a class="reference internal" href="#id1">Basic Usage</a><ul>
 <li><a class="reference internal" href="#reading-from-a-csv">Reading from a CSV</a></li>
-<li><a class="reference internal" href="#creating-a-microframe-object">Creating a MicroFrame Object</a><ul>
-<li><a class="reference internal" href="#data-manipulation">Data Manipulation</a></li>
+<li><a class="reference internal" href="#creating-a-microframe-object">Creating a MicroFrame Object</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#data-manipulation">Data Manipulation</a><ul>
 <li><a class="reference internal" href="#renaming-columns">Renaming Columns</a></li>
 <li><a class="reference internal" href="#changing-data-types">Changing Data Types</a></li>
 <li><a class="reference internal" href="#accessing-column-data-with-boolean-indexing">Accessing Column Data with Boolean Indexing</a></li>
-<li><a class="reference internal" href="#accessing-row-data-with-iloc">Accessing Row Data with <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a><ul>
-<li><a class="reference internal" href="#advanced-indexing-with-iloc">Advanced Indexing with <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a></li>
+<li><a class="reference internal" href="#accessing-row-data-with-iloc">Accessing Row Data with <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#advanced-indexing-with-iloc">Advanced Indexing with <code class="docutils literal notranslate"><span class="pre">iloc</span></code></a><ul>
 <li><a class="reference internal" href="#accessing-a-single-row">Accessing a Single Row</a></li>
 <li><a class="reference internal" href="#accessing-multiple-rows">Accessing Multiple Rows</a></li>
 <li><a class="reference internal" href="#accessing-a-single-cell">Accessing a Single Cell</a></li>
 <li><a class="reference internal" href="#setting-a-value-in-a-cell">Setting a Value in a Cell</a></li>
-<li><a class="reference internal" href="#slicing-rows-and-columns">Slicing Rows and Columns</a><ul>
-<li><a class="reference internal" href="#displaying-data">Displaying Data</a></li>
+<li><a class="reference internal" href="#slicing-rows-and-columns">Slicing Rows and Columns</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#displaying-data">Displaying Data</a><ul>
 <li><a class="reference internal" href="#print-the-first-few-rows">Print the First Few Rows</a></li>
-<li><a class="reference internal" href="#print-the-last-few-rows">Print the Last Few Rows</a><ul>
+<li><a class="reference internal" href="#print-the-last-few-rows">Print the Last Few Rows</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#converting-to-numpy-array">Converting to NumPy Array</a></li>
 <li><a class="reference internal" href="#chaining-iloc-with-to-numpy">Chaining <code class="docutils literal notranslate"><span class="pre">iloc</span></code> with <code class="docutils literal notranslate"><span class="pre">to_numpy</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>

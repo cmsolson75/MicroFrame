@@ -14,7 +14,7 @@ html_theme = "furo"
 project = "MicroFrame"
 copyright = "2023, Cameron Olson"
 author = "Cameron Olson"
-release = "1.0"
+release = "0.1.0"
 
 html_title = f"{project} {release} Documentation"
 html_favicon = "_static/Logo.png"

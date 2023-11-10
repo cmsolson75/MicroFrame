@@ -9,11 +9,11 @@ Quick Start
 
 .. mdinclude:: ../README.md
    :start-line: 27
-   :end-line: 43
+   :end-line: 47
 
 Basic Usage
 -----------
 
 .. mdinclude:: ../README.md
-   :start-line: 47
-   :end-line: 170
+   :start-line: 49
+   :end-line: 176
