@@ -35,10 +35,14 @@ mframe = mf.read_csv("path_to_your_csv_file.csv")
 
 # Alternatively, create a MicroFrame object manually
 data = [[1, "a"], [2, "b"], [3, "c"]]
-columns = ["num", "char"]
 dtypes = ["int32", "U1"]
+columns = ["num", "char"]
 
-mframe = mf.MicroFrame(data, columns, dtypes)
+mframe = mf.MicroFrame(data, dtypes, columns)
+mframe.head() # Display first 5 rows
+# Extract data as numpy array
+mframe_slice = mframe.iloc[:, 0] # returns all rows, but just col 0
+numpy_array = mframe_slice.to_numpy() # returns mframe_slice as a numpy array
 ```
 
 ## Examples
@@ -58,11 +62,12 @@ mframe = mf.read_csv("path_to_your_csv_file.csv")
 #### Creating a MicroFrame Object
 
 ```python
+import microframe as mf
 data = [[1, "a"], [2, "b"], [3, "c"]]
-columns = ["num", "char"]
 dtypes = ["int32", "U1"]
+columns = ["num", "char"]
 
-mframe = mf.MicroFrame(data, columns, dtypes)
+mframe = mf.MicroFrame(data, dtypes, columns)
 ```
 
 ### Data Manipulation
@@ -85,12 +90,13 @@ mframe.change_dtypes({"number": "float64", "character": "U10"})
 
 ```python
 data = [[1, "a"], [2, "b"], [3, "c"]]
-columns = ["num", "char"]
 dtypes = ["int32", "U1"]
+columns = ["num", "char"]
 
-mframe = mf.MicroFrame(data, columns, dtypes)
+mframe = mf.MicroFrame(data, dtypes, columns)
 first_col = mframe["num"] # Access just num column
 ```
+
 #### Accessing Row Data with `iloc`
 
 ```python
@@ -167,6 +173,20 @@ For scenarios where you need to perform NumPy operations on a subset of your dat
 # Select the first two rows using iloc and convert them to a NumPy array
 numpy_subset = mframe.iloc[:, 1:5].to_numpy()
 ```
+
+## Contributing
+
+#### Installing dev dependencies via pip
+```bash
+pip install "microframe[dev]"
+```
+
+#### Running tests
+
+```bash
+python -m pytest tests
+```
+
 
 ## Documentation
 
